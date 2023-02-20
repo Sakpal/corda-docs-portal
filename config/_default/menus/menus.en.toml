@@ -375,7 +375,7 @@ weight = 6000
 [[corda-5-beta]]
 identifier = "corda-5-beta-tools-add-ons"
 name = "Tools and Add-Ons"
-weight = 6000
+weight = 5050
 
 #keeping for when we decide to move CDL to a standalone sub-section with a LHS menu
 #[[tools-cdl]]
