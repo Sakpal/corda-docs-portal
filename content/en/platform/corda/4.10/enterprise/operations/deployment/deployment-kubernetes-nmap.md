@@ -13,7 +13,7 @@ weight: 40
 
 # CENM Network Map Service Helm Chart
 
-This Helm chart is to configure, deploy, and run the [CENM Network Map Service](../../../../1.5/cenm/network-map.md) on Kubernetes.
+This Helm chart is to configure, deploy, and run the [CENM Network Map Service]({{< relref "../../../../1.5/cenm/network-map.md" >}}) on Kubernetes.
 
 ## Example usage
 
@@ -45,7 +45,7 @@ helm install nmap nmap --set shell.password="superDifficultPassword"
 | `dockerImageCli.tag`          | Docker image tag | `1.5.4-zulu-openjdk8u242` |
 | `dockerImageCli.pullPolicy`   | Image pull policy. Ref.: https://kubernetes.io/docs/concepts/containers/images/#updating-images | `Always` |
 | `nmapJar.xmx`                 | Value for java -Xmx memory settings | `1G` |
-| `nmapJar.path`                | The directory where the Network Map Service `.jar` file is stored | `bin` |
+| `nmapJar.path`                | The directory where the Network Map Service JAR file is stored | `bin` |
 | `nmapJar.configPath`          | The directory where the Network Map Service configuration is stored | `etc` |
 | `database.driverClassName`    | Network Map Service database connection details | `org.h2.Driver` |
 | `database.jdbcDriver`         | Network Map Service database connection details | `""`
@@ -62,4 +62,4 @@ helm install nmap nmap --set shell.password="superDifficultPassword"
 | `logsContainersEnabled`       | Enable container displaying live logs | `true`
 {{< /table >}}
 
-For additional information on database connection details refer to the official documentation: [database documentation](../../../../1.5/cenm/config-database.md).
+For additional information on database connection details refer to the official documentation: [database documentation]({{< relref "../../../../1.5/cenm/config-database.md" >}}).

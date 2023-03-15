@@ -13,7 +13,7 @@ weight: 70
 
 # CENM Zone Service Helm Chart
 
-This Helm chart is to configure, deploy, and run the [CENM Zone Service](../../../../1.5/cenm/zone-service.md) on Kubernetes.
+This Helm chart is to configure, deploy, and run the [CENM Zone Service]({{< relref "../../../../1.5/cenm/zone-service.md" >}}) on Kubernetes.
 
 ## Example usage
 
@@ -47,7 +47,7 @@ helm install cenm-zone auth --set idmanPublicIP=X.X.X.X --set prefix=cenm --set 
 | `volumeSizeZoneH2`            | Volume size for the `h2/` directory | `1Gi` |
 | `volumeSizeZoneLogs`          | Volume size for the `logs/` directory | `5Gi` |
 | `zoneJar.xmx`                 | Value for java -Xmx flag | `1Gi` |
-| `zoneJar.path`                | The directory where the Zone Service `.jar` is stored | `bin` |
+| `zoneJar.path`                | The directory where the Zone Service JAR is stored | `bin` |
 | `zoneJar.configPath`          | The directory where the Zone Service configuration is stored | `etc` |
 | `authService.host`            | Definition of the Auth Service | `auth`
 | `authService.port`            | Definition of the Auth Service | `8081`
@@ -55,4 +55,4 @@ helm install cenm-zone auth --set idmanPublicIP=X.X.X.X --set prefix=cenm --set 
 | `logsContainersEnabled`       | Enable container displaying live logs | `true`
 {{< /table >}}
 
-For additional information on database connection details, refer to the official documentation: [database documentation](../../../../1.5/cenm/config-database.md).
+For additional information on database connection details, refer to the official documentation: [database documentation]({{< relref "../../../../1.5/cenm/config-database.md" >}}).

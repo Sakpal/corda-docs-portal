@@ -168,7 +168,7 @@ rpcUsers = [[ user: "user1", "password": "test", "permissions": ["StartFlow.net.
 configFile = "samples/trader-demo/src/main/resources/node-b.conf"
 ```
 
-* `sshdPort` &lt;integer&gt; - use this configuration option to specify the SSH port for the Docker container. This will be mapped to the same port on the host.  If `sshdPort` is specified, then that port must be available on the host and not in use by some other service. If `sshdPort` is not specified, then a default value will be used for the SSH port on the container. Use the `docker port <container_name>` command to check which port has been allocated on the host for your container. For more information, see [sshd](../../../../../../../en/platform/corda/4.8/enterprise/node/setup/corda-configuration-fields.html#sshd). For example:
+* `sshdPort` &lt;integer&gt; - use this configuration option to specify the SSH port for the Docker container. This will be mapped to the same port on the host.  If `sshdPort` is specified, then that port must be available on the host and not in use by some other service. If `sshdPort` is not specified, then a default value will be used for the SSH port on the container. Use the `docker port <container_name>` command to check which port has been allocated on the host for your container. For more information, see [sshd](../setup/corda-configuration-fields.html#sshd). For example:
 
 ```kotlin
 sshd {
@@ -182,7 +182,7 @@ You can extend the `deployNodes` task with more `node {}` blocks to generate as 
 When adding nodes, make sure that there are no port clashes!
 {{< /warning >}}
 
-To extend node configuration beyond the properties defined in the `deployNodes` task, use the `configFile` property with the file path (relative or absolute) set to an additional configuration file. This file should follow the standard [node configuration](../setup/corda-configuration-file.md) format of `node.conf`. The properties set there will be appended to the generated node configuration.
+To extend node configuration beyond the properties defined in the `deployNodes` task, use the `configFile` property with the file path (relative or absolute) set to an additional configuration file. This file should follow the standard [node configuration]({{< relref "../setup/corda-configuration-file.md" >}}) format of `node.conf`. The properties set there will be appended to the generated node configuration.
 
 {{< note >}}
 If you add a property to the additional configuration file that has already been created by the `deployNodes` task, both properties will be present in generated node configuration.
@@ -222,7 +222,7 @@ running the bootstrapper.
 
 ## Package namespace ownership
 
-To configure [package namespace ownership](../../../../../../../en/platform/corda/4.8/enterprise/node/deploy/env-dev.html#package-namespace-ownership), use the optional `networkParameterOverrides` and `packageOwnership` blocks, in a similar way to how the configuration file is used by the [Network Bootstrapper](../../network-bootstrapper.md) tool. For example:
+To configure [package namespace ownership](../../../../../../../en/platform/corda/4.8/enterprise/node/deploy/env-dev.html#package-namespace-ownership), use the optional `networkParameterOverrides` and `packageOwnership` blocks, in a similar way to how the configuration file is used by the [Network Bootstrapper]({{< relref "../../network-bootstrapper.md" >}}) tool. For example:
 
 ```groovy
 task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
@@ -240,15 +240,15 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
 }
 ```
 
-## Sign CorDapp `.jar` files
+## Sign CorDapp JAR files
 
-The default Cordform behaviour is to deploy CorDapp `.jar` files “as built”.
+The default Cordform behaviour is to deploy CorDapp JAR files “as built”.
 
-* Prior to Corda 4.0, all CorDapp `.jar` files were unsigned.
-* As of Corda 4.0, CorDapp `.jar` files created by the gradle `cordapp` plug-in are signed by a Corda development certificate by default.
+* Prior to Corda 4.0, all CorDapp JAR files were unsigned.
+* As of Corda 4.0, CorDapp JAR files created by the gradle `cordapp` plug-in are signed by a Corda development certificate by default.
 
-You can use the Cordform `signing` entry to override and customise the signing of CorDapp `.jar` files.
-Signing a CorDapp enables its contract classes to use signature constraints instead of other types of constraints, such as [Contract Constraints](../../cordapps/api-contract-constraints.md).
+You can use the Cordform `signing` entry to override and customise the signing of CorDapp JAR files.
+Signing a CorDapp enables its contract classes to use signature constraints instead of other types of constraints, such as [Contract Constraints]({{< relref "../../cordapps/api-contract-constraints.md" >}}).
 
 The signing task may use an external keystore, or create a new one.
 You can use the following parameters in the `signing` entry:
@@ -256,7 +256,7 @@ You can use the following parameters in the `signing` entry:
 
 * `enabled` - the control flag to enable the signing process. It is set to `false` by default. Set to `true` to enable signing.
 * `all` - if set to `true` (default), all CorDapps inside the `cordapp` sub-directory will be signed. If set to `false`, only the generated CorDapp will be signed.
-* `options` - any relevant parameters of [SignJar ANT task](https://ant.apache.org/manual/Tasks/signjar.html) and [GenKey ANT task](https://ant.apache.org/manual/Tasks/genkey.html). By default the `.jar` file is signed by a Corda development key. You can specify the external keystore can be specified. The minimal list of required options is shown below. For other options, see [SignJar task](https://ant.apache.org/manual/Tasks/signjar.html).
+* `options` - any relevant parameters of [SignJar ANT task](https://ant.apache.org/manual/Tasks/signjar.html) and [GenKey ANT task](https://ant.apache.org/manual/Tasks/genkey.html). By default the JAR file is signed by a Corda development key. You can specify the external keystore can be specified. The minimal list of required options is shown below. For other options, see [SignJar task](https://ant.apache.org/manual/Tasks/signjar.html).
   * `keystore` - the path to the keystore file. The default setting is `cordadevcakeys.jks`. The keystore is shipped with the plug-in.
   * `alias` - the alias to sign under. The default value is `cordaintermediateca`.
   * `storepass` - the keystore password. The default value is `cordacadevpass`.
@@ -288,9 +288,9 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
     //...
 ```
 
-Contracts classes from signed CorDapp `.jar` files are checked by signature constraints by default.
-You can force them to be checked by zone constraints by adding contract class names to the `includeWhitelist` entry - the list will generate an `include_whitelist.txt` file used internally by the [Network Bootstrapper](../../network-bootstrapper.md) tool.
-Before you add `includeWhitelist` to the `deployNodes` task, see [Contract Constraints](../../cordapps/api-contract-constraints.md) to understand the implications of using different constraint types.
+Contracts classes from signed CorDapp JAR files are checked by signature constraints by default.
+You can force them to be checked by zone constraints by adding contract class names to the `includeWhitelist` entry - the list will generate an `include_whitelist.txt` file used internally by the [Network Bootstrapper]({{< relref "../../network-bootstrapper.md" >}}) tool.
+Before you add `includeWhitelist` to the `deployNodes` task, see [Contract Constraints]({{< relref "../../cordapps/api-contract-constraints.md" >}}) to understand the implications of using different constraint types.
 The snippet below configures contracts classes from the Finance CorDapp to be verified using zone constraints instead of signature constraints:
 
 ```groovy

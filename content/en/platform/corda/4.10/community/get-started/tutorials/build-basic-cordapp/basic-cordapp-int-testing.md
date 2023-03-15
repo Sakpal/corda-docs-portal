@@ -23,7 +23,7 @@ After you've completed this tutorial, you will be able to write integration test
 
 Before you start writing your own unit tests:
 
-* Read the [API: Testing](../../../api-testing.md) documentation.
+* Read the [API: Testing]({{< relref "../../../api-testing.md" >}}) documentation.
 * Download `TemplateInitiator.java` and `TemplateContract.java` from the [CorDapp tutorial repository](https://github.com/corda/samples-java/tree/master/Basic/tutorial-applestamp).
 * Move `TemplateState.java` into your `com.tutorial` package.
 
@@ -62,7 +62,7 @@ Next you must indicate where your CorDapp is so that the test engine can run:
 
 1. Add a `@Before` annotation to indicate that this is what must happen before the test is run.
 2. Add a `public void setup` including the `new MockNetwork` and `new MockNetworkParameters`. Use `withCordappsForAllNodes` to reference the CorDapp.
-3. Add  the function `TestCorDapp.findCordapp` to find the contracts and flows `.jar`s (`com.tutorial.contracts` and `com.tutorial.flows`, respectively).
+3. Add  the function `TestCorDapp.findCordapp` to find the contracts and flows JARs (`com.tutorial.contracts` and `com.tutorial.flows`, respectively).
 4. Create an `a` and `b` node using `createPartyNode`. Use `null` for the `legalName` of the node to use the default.
 5. Add the `runNetwork` command to start the `MockNetwork`.
 

@@ -1,12 +1,16 @@
 ---
+title: Getting started
 date: '2023-01-27'
+
 menu:
   corda-enterprise-4-7:
-    parent: get-started-landing
-    weight: 40
-    name: "Getting started with Corda 4"
-title: Getting started with Corda 4
+    identifier: get-started-landing-4-7
+    name: "Getting started"
+tags:
+- started
+- enterprise
 
+weight: -1
 ---
 
 # Getting started with Corda 4
@@ -22,11 +26,10 @@ The best way to get started with Corda is to:
      * Use the Docker image and accompanying guide from the [Docker Hub](https://hub.docker.com/repository/docker/corda/community).
 
 2. Familiarize yourself with the [Corda key concepts](../../enterprise/about-corda/corda-key-concepts.md). 
-3. Run a [sample CorDapp](../../community/tutorial-cordapp.md) to see Corda in action. 
-(../../community/key-concepts-time-windows.md)
-4. [Build your own CorDapp](../../community/building-a-cordapp-index.md) from scratch.
+3. Run a [sample CorDapp]({{< relref "../cordapps/tutorial-cordapp.md" >}}) to see Corda in action. 
+4. [Build your own CorDapp]({{< relref "../cordapps/cordapp-build-systems.md" >}}) from scratch.
 
-You can then take your Corda integration to the next level by deep-diving into specific topics in our [Corda Enterprise](../../enterprise/_index.md) documentation. You can also view the [API reference material](../../../../../api-ref/_index.md), browse [featured apps](../../../../../apps/_index.md), or browse [tools and add-ons](../../../../../tools/_index.md).
+You can then take your Corda integration to the next level by deep-diving into specific topics in our [Corda Enterprise](../../enterprise.html) documentation. You can also view the [API reference material](../../../../../api-ref.html), browse [featured apps](../apps/apps-index.md), or browse [tools and add-ons](../../../../../tools.html).
 
 {{< note >}}
 <b>Read Corda white papers</b>

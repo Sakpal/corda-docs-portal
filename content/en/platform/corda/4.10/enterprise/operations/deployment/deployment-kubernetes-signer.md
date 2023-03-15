@@ -13,7 +13,7 @@ weight: 60
 
 # CENM Signing Service Helm Chart
 
-This Helm chart is to configure, deploy and run the  [CENM Signing Service](../../../../1.5/cenm/signing-service.md) on Kubernetes.
+This Helm chart is to configure, deploy and run the  [CENM Signing Service]({{< relref "../../../../1.5/cenm/signing-service.md" >}}) on Kubernetes.
 
 As the initial step this chart runs automatically PKI tool which creates and stores certificates necessary for correct Corda Network operation.
 By default, the certificates have sample X.500 subject names (for example, the Identity Manager Service certificate has the subject name “CN=Test Identity Manager Service Certificate, OU=HQ, O=HoldCo LLC, L=New York, C=US”). The subject name can be set by configuration options starting with `pki.certificates.` prefix.
@@ -22,8 +22,8 @@ Passwords to the security certificates keys and keystores cannot be configurable
 
 For more information about PKI Tool and Certificate Hierarchy refer to:
 
-* [Certificate Hierarchy Guide](../../../../1.5/cenm/pki-guide.md)
-* [PKI Tool](../../../../1.5/cenm/pki-tool.md)
+* [Certificate Hierarchy Guide]({{< relref "../../../../1.5/cenm/pki-guide.md" >}})
+* [PKI Tool]({{< relref "../../../../1.5/cenm/pki-tool.md" >}})
 
 ## Example usage
 
@@ -63,7 +63,7 @@ The name needs to be a valid X500 name and commas need to be escaped by a backsl
 | `volumeSizeSignerEtc`                        | Volume size for the `etc/` directory | `1Mi` |
 | `volumeSizeSignerLogs`                       | Volume size for the `logs/` directory | `10Gi` |
 | `signerJar.xmx`                              | Value for java -Xmx memory settings | `1G` |
-| `signerJar.path`                             | The directory where the Signing Service `.jar` file is stored | `bin` |
+| `signerJar.path`                             | The directory where the Signing Service JAR file is stored | `bin` |
 | `signerJar.configPath`                       | The directory where the Signing Service configuration is stored | `etc` |
 | `signerJar.configFile`                       | The file name of the Signing Service configuration file  | `signer.conf` |
 | `signers.CSR.schedule.interval`              | The schedule interval for the CSR signing process | `1m` |

@@ -14,6 +14,27 @@ This section describes how to configure a [dynamic network](../../../deploying/n
 The PowerShell commands listed on this page are for use with PowerShell 7.0 and will not execute correctly with PowerShell 5.x.
 {{< /note >}}
 
+To run a dynamic network, you must complete the following high-level steps:
+1. [Start a Corda cluster](deployment-tutorials/deploy-corda-cluster.html).
+2. [Create an MGM GroupPolicy.json file](../operating/operating-tutorials/onboarding/mgm-onboarding.html#create-the-group-policy-file).
+3. [Package the MGM GroupPolicy.json file into an MGM CPI](../operating/operating-tutorials/onboarding/mgm-onboarding.html#build-the-cpi).
+4. [Upload the CPI to your cluster](../operating/operating-tutorials/onboarding/mgm-onboarding.html#upload-the-cpi).
+5. [Create a virtual node in your cluster for the MGM](../operating/operating-tutorials/onboarding/mgm-onboarding.html#create-a-virtual-node).
+6. [Assign required Hardware Security Modules (HSMs) for the MGM](../operating/operating-tutorials/onboarding/mgm-onboarding.html#assign-soft-hsm-and-generate-session-initiation-and-ecdh-key-pair).
+7. [Create required keys and optionally import required certificates](../operating/operating-tutorials/onboarding/mgm-onboarding.html#configure-the-cluster-tls-key-pair-and-certificate).
+8. [Build the registration context](../operating/operating-tutorials/onboarding/mgm-onboarding.html#build-registration-context).
+9. [Use the register endpoint to finalise the MGM setup so that it is ready to accept members](../operating/operating-tutorials/onboarding/mgm-onboarding.html#register-the-mgm).
+10. [Export the GroupPolicy.json file that members require to join the group](../operating/operating-tutorials/onboarding/mgm-onboarding.html#export-the-group-policy).
+11. [Package this GroupPolicy.json file into a member CPI](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#build-the-cpi).
+12. [Upload this CPI to the cluster](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#upload-the-cpi).
+13. [Create the virtual node for the member](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#create-a-virtual-node).
+14. [Assign the required HSMs for P2P session initiation](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#configure-the-p2p-session-initiation-key-pair-and-certificate).
+15. [Assign the required HSMs for the ledger](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#configure-the-ledger-key-pair-and-certificate).
+16. [Create the required keys, and optionally import required certificates](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#configure-the-tls-key-pair-and-certificate).
+17. [Configure the member virtual node for network communication](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#configure-the-member-virtual-node-for-network-communication).
+18. [Build the registration context](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#build-registration-context).
+19. [Use the register endpoint to request membership from the MGM](../operating/operating-tutorials/onboarding/dynamic-onboarding.html#register-members).
+
 ## Set Variables
 Set the values of variables for use in later commands:
 
@@ -21,16 +42,16 @@ Set the values of variables for use in later commands:
    {{< tabs >}}
    {{% tab name="Bash"%}}
    ```shell
-   export RPC_HOST=localhost
-   export RPC_PORT=8888
+   export REST_HOST=localhost
+   export REST_PORT=8888
    export P2P_GATEWAY_HOST=localhost
    export P2P_GATEWAY_PORT=8080
    ```
    {{% /tab %}}
    {{% tab name="PowerShell" %}}
    ```shell
-   $RPC_HOST = "localhost"
-   $RPC_PORT = 8888
+   $REST_HOST = "localhost"
+   $REST_PORT = 8888
    $P2P_GATEWAY_HOST = "localhost"
    $P2P_GATEWAY_PORT = 8080
    $AUTH_INFO = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("admin:admin" -f $username,$password)))
@@ -44,12 +65,12 @@ Set the values of variables for use in later commands:
    {{< tabs >}}
    {{% tab name="Bash"%}}
    ```shell
-   export API_URL="https://$RPC_HOST:$RPC_PORT/api/v1"
+   export API_URL="https://$REST_HOST:$REST_PORT/api/v1"
    ```
    {{% /tab %}}
    {{% tab name="PowerShell" %}}
    ```shell
-   $API_URL = "https://$RPC_HOST:$RPC_PORT/api/v1"
+   $API_URL = "https://$REST_HOST:$REST_PORT/api/v1"
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -81,17 +102,17 @@ To retrieve the `GroupPolicy.json` file from the MGM:
    {{< tabs >}}
    {{% tab name="Bash"%}}
    ```shell
-   export MGM_RPC_HOST=localhost
-   export MGM_RPC_PORT=8888
-   export MGM_API_URL="https://$MGM_RPC_HOST:$MGM_RPC_PORT/api/v1"
+   export MGM_REST_HOST=localhost
+   export MGM_REST_PORT=8888
+   export MGM_API_URL="https://$MGM_REST_HOST:$MGM_REST_PORT/api/v1"
    export MGM_HOLDING_ID=<MGM Holding ID>
    ```
    {{% /tab %}}
    {{% tab name="PowerShell" %}}
    ```shell
-   $MGM_RPC_HOST = "localhost"
-   $MGM_RPC_PORT = "8888"
-   $MGM_API_URL = "https://$MGM_RPC_HOST:$MGM_RPC_PORT/api/v1"
+   $MGM_REST_HOST = "localhost"
+   $MGM_REST_PORT = "8888"
+   $MGM_API_URL = "https://$MGM_REST_HOST:$MGM_REST_PORT/api/v1"
    $MGM_HOLDING_ID = <MGM Holding ID>
    Invoke-RestMethod -SkipCertificateCheck  -Headers @{Authorization=("Basic {0}" -f $AUTH_INFO)} -Uri "$MGM_API_URL/mgm/$MGM_HOLDING_ID/info" | ConvertTo-Json -Depth 4 > $WORK_DIR/GroupPolicy.json
    ```
@@ -104,7 +125,7 @@ To retrieve the `GroupPolicy.json` file from the MGM:
 
 ## Create a CPI
 
-Build a CPI using the Corda CLI packaging plugin, passing in the member CPB and your generated `GroupPolicy.json` file. For more information about creating CPIs, see the [CorDapp Packaging section](../../../developing/development-tutorials/cordapp-packaging.md).
+Build a CPI using the Corda CLI packaging plugin, passing in the member CPB and your generated `GroupPolicy.json` file. For more information about creating CPIs, see the [CorDapp Packaging section]({{< relref "../../../developing/development-tutorials/cordapp-packaging.md" >}}).
 
 ## Upload the CPI
 
@@ -112,11 +133,13 @@ To upload the CPI, run the following:
 {{< tabs >}}
 {{% tab name="Bash"%}}
 ```
+export CPI_PATH=<CPI-directory/CPI-filename.cpi>
 curl --insecure -u admin:admin -F upload=@$CPI_PATH $API_URL/cpi/
 ```
 {{% /tab %}}
 {{% tab name="PowerShell" %}}
 ```shell
+$CPI_PATH = "$WORK_DIR\mgm-5.0.0.0-SNAPSHOT-package.cpi"
 $CPI_UPLOAD_RESPONSE = Invoke-RestMethod -SkipCertificateCheck  -Headers @{Authorization=("Basic {0}" -f $AUTH_INFO)} -Uri "$API_URL/cpi/" -Method Post -Form @{
     upload = Get-Item -Path $CPI_PATH
 }
@@ -230,7 +253,7 @@ export LEDGER_KEY_ID=<ledger key ID>
 This step is only necessary if you are onboarding a member as a notary.
 {{< /note >}}
 
-Gnerate notary keys in a similar way as done for other key types. First, create a HSM, then generate the key and store the ID:
+Generate notary keys in a similar way as done for other key types. First, create a HSM, then generate the key and store the ID:
 
 {{< tabs >}}
 {{% tab name="Bash"%}}
@@ -262,6 +285,8 @@ When using cluster-level TLS, it is only necessary to do this once per cluster.
 
 You must perform the same steps that you did for setting up the MGM to enable P2P communication for the locally hosted identities.
 Use the Certificate Authority (CA) whose trustroot certificate was configured in the MGM's registration context.
+
+If using mutual TLS, you must must add the certificate subject to the allowed list of the MGM. For more information, see [Update the MGM Allowed Certificate Subject List](mutual-tls.html#update-the-mgm-allowed-certificate-subject-list).
 
 1. Create a TLS key pair at the P2P cluster-level by running this command:
 
@@ -469,6 +494,8 @@ export REGISTRATION_CONTEXT='{
   "corda.session.key.signature.spec": "SHA256withECDSA",
   "corda.ledger.keys.0.id": "'$LEDGER_KEY_ID'",
   "corda.ledger.keys.0.signature.spec": "SHA256withECDSA",
+  "corda.notary.keys.0.id" = "$NOTARY_KEY_ID",
+  "corda.notary.keys.0.signature.spec" = "SHA256withECDSA"
   "corda.endpoints.0.connectionURL": "https://'$P2P_GATEWAY_HOST':'$P2P_GATEWAY_PORT'",
   "corda.endpoints.0.protocolVersion": "1",
   "corda.roles.0" : "notary",
@@ -484,6 +511,8 @@ $REGISTRATION_CONTEXT = @{
   'corda.session.key.signature.spec' = "SHA256withECDSA"
   'corda.ledger.keys.0.id' = $LEDGER_KEY_ID
   'corda.ledger.keys.0.signature.spec' = "SHA256withECDSA"
+  "corda.notary.keys.0.id" = "$NOTARY_KEY_ID",
+  "corda.notary.keys.0.signature.spec" = "SHA256withECDSA"
   'corda.endpoints.0.connectionURL' = "https://$P2P_GATEWAY_HOST`:$P2P_GATEWAY_PORT"
   'corda.endpoints.0.protocolVersion' = "1"
   'corda.roles.0' : "notary",

@@ -13,7 +13,7 @@ weight: 500
 
 # Metering client for the Metering Collection Tool
 
-The [Metering Collection Tool](metering-collector.md) collects metering data from one or more Corda Enterprise Nodes. The purpose of the metering _client_ is to perform this remotely without having to access the environment where the collector node is running, or opening a [Shell](../shell.md) for it. To do this, the metering client uses RPC to connect to a designated collector node. The designated collector node then runs the Metering Collection Tool to collect the metering data from the specified set of nodes: these are known as the destination nodes. The data is then returned to the metering client. The metering client saves the results to a file.
+The [Metering Collection Tool](metering-collector.md) collects metering data from one or more Corda Enterprise Nodes. The purpose of the metering _client_ is to perform this remotely without having to access the environment where the collector node is running, or opening a [Shell]({{< relref "../shell.md" >}}) for it. To do this, the metering client uses RPC to connect to a designated collector node. The designated collector node then runs the Metering Collection Tool to collect the metering data from the specified set of nodes: these are known as the destination nodes. The data is then returned to the metering client. The metering client saves the results to a file.
 
 {{< note >}}
 Destination nodes must be configured to share their metering data with the designated collector node. For more information, see [How metering data is shared](metering-collector.html#how-metering-data-is-shared).
@@ -112,7 +112,7 @@ destinations = [ "O=PartyA,L=London,C=GB", "O=PartyB,L=London,C=GB", "O=PartyC,L
 Metering data will be collected for each listed CorDapp. You can list the CorDapps in the following ways:
 
 * By name (the `shortName` of the workflows part of the CorDapp).
-* By `.jar` hash (SHA-256 hash of the `.jar` file representing the workflows part of the CorDapp).
+* By JAR hash (SHA-256 hash of the JAR file representing the workflows part of the CorDapp).
 * By signature hash (SHA-256 hash of the public key used to sign the workflows part of the CorDapp).
 
 These lists are specified by `cordappsByName`, `cordappsByJarHash`, and `cordappsBySignatureHash`.
@@ -269,7 +269,7 @@ period = "P30D"
 
 ## Run the metering client
 
-The metering client is a `.jar` file which is run on the command line.
+The metering client is a JAR file which is run on the command line.
 
 ```bash
 java -jar corda-tools-metering-rpc-client.jar --config "path/to/config.conf"

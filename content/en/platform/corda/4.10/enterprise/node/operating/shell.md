@@ -86,13 +86,13 @@ The shell will display in the node’s terminal window. It connects to the node 
 
 ## The standalone shell
 
-The standalone shell is a standalone application interacting with a Corda node via RPC calls. RPC node permissions are necessary for authentication and authorisation. Certain operations, such as starting flows, require access to the CorDapp `.jar` files.
+The standalone shell is a standalone application interacting with a Corda node via RPC calls. RPC node permissions are necessary for authentication and authorisation. Certain operations, such as starting flows, require access to the CorDapp JAR files.
 
 ### Starting the standalone shell
 
 You can access the standalone shell from [software.r3.com](https://software.r3.com).
 
-Run the `corda-standalone-shell` `.jar` using:
+Run the `corda-standalone-shell` JAR using:
 
 ```
  java -jar corda-standalone-shell-4.10.jar [-hvV] [--logging-level=<loggingLevel>] [--password=<password>]
@@ -147,7 +147,7 @@ Where:
 
 You can install the shell in your node in two different ways:
 
-* Download the `corda-shell` `.jar` from the [Artifactory](https://software.r3.com/ui/native/r3-corda-releases/com/r3/corda/corda-shell/) and install it in a node's `/drivers` directory to run the shell in the same terminal that starts the node.
+* Download the `corda-shell` JAR from the [Artifactory](https://software.r3.com/ui/native/r3-corda-releases/com/r3/corda/corda-shell/) and install it in a node's `/drivers` directory to run the shell in the same terminal that starts the node.
 By default, a Corda node does not run the shell.
 
 * When using `cordaformation`, the shell can be included in the generated nodes by adding the following in the `dependencies` block. The `dependencies` block must be in the same `build.gradle` file as the `deployNodes` task:
@@ -235,7 +235,7 @@ This is a new mode added in the Enterprise 4.3 release to prevent the CRaSH shel
 
 When a shell is running in unsafe mode, the shell behaviour will be the same as before and will include CRaSH built-in commands. By default the internal shell will run in safe mode but will still be have the ability to execute RPC client calls as before based on existing RPC permissions. No Corda functionality is affected by this change; only the ability to access to the CRaSH shell embedded commands.
 
-When running an SSH shell, it will run in safe mode for any user that does not explicitly have permission ‘ALL’ as one the items in their RPC permission list, see [Working with the CordaRPCClient API](../../get-started/tutorials/supplementary-tutorials/tutorial-clientrpc-api.md) for more information about the RPC Client API. These shell changes arealso applied to the Stand Alone shell which will now run in safe mode (Enterprise 4.3 onwards). It may be possible that, in the future, the CRaSH shell embedded commands may become deprecated. Where possible, please do not write any new code that depends on them as they are technically not part of Corda functionality.
+When running an SSH shell, it will run in safe mode for any user that does not explicitly have permission ‘ALL’ as one the items in their RPC permission list, see [Working with the CordaRPCClient API]({{< relref "../../get-started/tutorials/supplementary-tutorials/tutorial-clientrpc-api.md" >}}) for more information about the RPC Client API. These shell changes arealso applied to the Stand Alone shell which will now run in safe mode (Enterprise 4.3 onwards). It may be possible that, in the future, the CRaSH shell embedded commands may become deprecated. Where possible, please do not write any new code that depends on them as they are technically not part of Corda functionality.
 
 ### Getting help
 
@@ -348,7 +348,7 @@ otherResults: []
 
 ### Upload and download attachments
 
-The shell can be used to upload and download attachments from the node. To learn how, see the [Working with attachments](../../get-started/tutorials/supplementary-tutorials/tutorial-attachments.md) tutorial.
+The shell can be used to upload and download attachments from the node. To learn how, see the [Working with attachments]({{< relref "../../get-started/tutorials/supplementary-tutorials/tutorial-attachments.md" >}}) tutorial.
 
 
 ### Extract attachment information

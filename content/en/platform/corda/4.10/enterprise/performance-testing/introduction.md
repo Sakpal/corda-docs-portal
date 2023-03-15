@@ -34,7 +34,7 @@ A typical test architecture consists of the following components:
 
 
 * A Corda network to be tested. This should be a network of Corda nodes along with a notary that is self-contained
-(in other words, does not depend on any external services). See the documentation on [Corda Networks](../network/corda-networks.md) for information on
+(in other words, does not depend on any external services). See the documentation on [Corda Networks]({{< relref "../network/corda-networks.md" >}}) for information on
 setting up a network.
 * A CorDapp that is to be tested and needs to be installed on the cluster.
 * An app to drive the test - Apache JMeter is used here.
@@ -133,7 +133,7 @@ These tests stress components in a single node, without any dependencies on othe
 
 #### Empty Flow
 
-The `EmptyFlow` test is part of the `perftest-cordapp` CorDapp. As its name suggests, this flow is empty and does not have any effect of its own - its purpose is to provide a timing for the overhead involved in starting a flow, such as RPC handling, deserialisation of the request, starting/winding down a flow, and sending the response. Note that a flow that requires inputs via RPC might have a larger overhead as these might need to be deserialised.
+The `EmptyFlow` test is part of the `perftest-cordapp` CorDapp. As its name suggests, this flow is empty and does not have any effect of its own - its purpose is to provide a timing for the overhead involved in starting a flow, such as RPC handling, deserialization of the request, starting/winding down a flow, and sending the response. Note that a flow that requires inputs via RPC might have a larger overhead as these might need to be deserialized.
 
 
 #### Issuance

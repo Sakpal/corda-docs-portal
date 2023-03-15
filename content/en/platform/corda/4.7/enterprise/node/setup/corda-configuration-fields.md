@@ -29,7 +29,7 @@ Nodes can use this configuration option to advertise HA endpoints and aliases to
 
 Optionally specify how much memory should be used to cache attachment contents in memory.
 
-*Default:* Default: 8 MB plus 5% of all heap memory above 300MB.
+*Default:* 8 MB plus 5% of all heap memory above 300MB.
 
 ## `attachmentCacheBound`
 
@@ -317,7 +317,7 @@ Allows fine-grained controls of various features only available in the enterpris
   * Default value: An empty list.
 * `enableURLConnectionCache`
   * Enables URL connection caching. It is set to `false` by default, and it is highly recommended to keep it that way.
-  * When caching is enabled (set to `true`), `.jar` files will be cached, which can cause leaking of file handles. This is caused by the way the `ServiceLoader` handles `.jar` files that are children of the `URLClassLoader`. For more information, see [here](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8156014).
+  * When caching is enabled (set to `true`), JAR files will be cached, which can cause leaking of file handles. This is caused by the way the `ServiceLoader` handles JAR files that are children of the `URLClassLoader`. For more information, see [here](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8156014).
     * *Default:* `false`
 
 * `tuning`
@@ -365,7 +365,7 @@ Allows fine-grained controls of various features only available in the enterpris
 
 ## `extraNetworkMapKeys`
 
-An optional list of private network map UUIDs. Your node will fetch the public network and private network maps based on these keys.
+An optional list of private network map UUIDs. Your node will fetch the public network and private network maps based on these keys. A private network UUID should be provided by network operator and lets you see nodes that are not visible on the public network.
 
 **Important: This is a temporary feature for onboarding network participants that limits their visibility for privacy reasons.**
 
@@ -908,7 +908,7 @@ This is the non-secret value for the development certificates automatically gene
 ## `useOpenSsl`
 
 If set to true, the node will use a native SSL implementation for TLS rather than the JVM SSL. The native SSL library currently shipped with
-Corda Enterprise is BoringSsl. The default is to use JVM SSL, i.e. the flag being set to `false`.
+Corda Enterprise is BoringSsl. The default is to use JVM SSL, i.e. the flag being set to `false`.  This configuration offers higher performance than the built-in library, but you can't use it with the Corda Firewall or an HSM—so this configuration is only recommended for private networks where there is a requirement to extract maximum performance.
 
 ## `useTestClock`
 

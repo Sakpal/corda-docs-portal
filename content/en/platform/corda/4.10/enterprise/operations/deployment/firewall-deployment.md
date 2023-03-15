@@ -117,8 +117,7 @@ the `TLS` socket server key and certificates into the `FloatOuter`. The process 
 
 ## Fields
 
-The configuration fields are listed in [Corda Enterprise Firewall configuration fields](corda-firewall-configuration-fields.md).
-
+The configuration fields are listed in [Corda Enterprise Firewall configuration fields]({{< relref "../../../enterprise/node/corda-firewall-configuration-fields.md" >}}).
 
 ## Complete example
 
@@ -155,7 +154,7 @@ To facilitate High Availability requirement deployment is split onto two data ce
 {{< note >}}
 This document does not describe how to perform SOCKS5 setup. It is assumed that this type of proxy is correctly configured as part
 of organisation’s IT infrastructure according to best practices/policies for outbound Internet connectivity. Other types of proxies are also supported
-as well as no proxy at all. For more information please see [proxyConfig](corda-firewall-configuration-fields.html#proxyconfig).
+as well as no proxy at all. For more information please see [proxyConfig]({{< relref "../../../enterprise/node/corda-firewall-configuration-fields.md#proxyconfig" >}}).
 {{< /note >}}
 
 
@@ -417,7 +416,7 @@ java -jar corda-tools-ha-utilities-4.10.jar node-registration --config-files=./e
 ```
 
 This call will process `node.conf` files and for each legal name performs Doorman registration. Depending on Corda Network configuration this process may require manual approval
-and the program will poll for for Certification Signing Request(CSR) completion. For more information see [Joining a compatibility zone](../../network/joining-a-compatibility-zone.md).
+and the program will poll for for Certification Signing Request(CSR) completion. For more information see [Joining a compatibility zone]({{< relref "../../network/joining-a-compatibility-zone.md" >}}).
 
 After successful execution this will produce two directories `entityA/certificates` and `entityB/certificates` containing the following files:
 

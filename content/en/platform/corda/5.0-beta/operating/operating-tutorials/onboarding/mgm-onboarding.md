@@ -22,16 +22,16 @@ Set the values of variables for use in later commands:
    {{< tabs >}}
    {{% tab name="Bash"%}}
    ```shell
-   export RPC_HOST=localhost
-   export RPC_PORT=8888
+   export REST_HOST=localhost
+   export REST_PORT=8888
    export P2P_GATEWAY_HOST=localhost
    export P2P_GATEWAY_PORT=8080
    ```
    {{% /tab %}}
    {{% tab name="PowerShell" %}}
    ```shell
-   $RPC_HOST = "localhost"
-   $RPC_PORT = 8888
+   $REST_HOST = "localhost"
+   $REST_PORT = 8888
    $P2P_GATEWAY_HOST = "localhost"
    $P2P_GATEWAY_PORT = 8080
    $AUTH_INFO = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("admin:admin" -f $username,$password)))
@@ -46,12 +46,12 @@ Set the values of variables for use in later commands:
    {{< tabs >}}
    {{% tab name="Bash"%}}
    ```shell
-   export API_URL="https://$RPC_HOST:$RPC_PORT/api/v1"
+   export API_URL="https://$REST_HOST:$REST_PORT/api/v1"
    ```
    {{% /tab %}}
    {{% tab name="PowerShell" %}}
    ```shell
-   $API_URL="https://$RPC_HOST:$RPC_PORT/api/v1"
+   $API_URL="https://$REST_HOST:$REST_PORT/api/v1"
    ```
    }
    {{% /tab %}}
@@ -135,7 +135,7 @@ Add-Content $WORK_DIR/GroupPolicy.json @"
 
 ## Build the CPI
 
-Build a CPI using the Corda CLI packaging plugin, passing in your generated MGM `GroupPolicy.json` file. For more information about creating CPIs, see the [CorDapp Packaging section](../../../developing/development-tutorials/cordapp-packaging.md).
+Build a CPI using the Corda CLI packaging plugin, passing in your generated MGM `GroupPolicy.json` file. For more information about creating CPIs, see the [CorDapp Packaging section]({{< relref "../../../developing/development-tutorials/cordapp-packaging.md" >}}).
 
 ## Upload the CPI
 
@@ -143,13 +143,13 @@ To upload the CPI, run the following:
 {{< tabs >}}
 {{% tab name="Bash"%}}
 ```
-export CPI_PATH=<CPI PATH>
+export CPI_PATH=<CPI-directory/CPI-filename.cpi>
 curl --insecure -u admin:admin -F upload=@$CPI_PATH $API_URL/cpi/
 ```
 {{% /tab %}}
 {{% tab name="PowerShell" %}}
 ```shell
-$CPI_PATH = "$WORK_DIR\mgm-5.0.0.0-SNAPSHOT-package.cpb"
+$CPI_PATH = "$WORK_DIR\mgm-5.0.0.0-SNAPSHOT-package.cpi"
 $CPI_UPLOAD_RESPONSE = Invoke-RestMethod -SkipCertificateCheck  -Headers @{Authorization=("Basic {0}" -f $AUTH_INFO)} -Uri "$API_URL/cpi/" -Method Post -Form @{
     upload = Get-Item -Path $CPI_PATH
 }
@@ -308,7 +308,7 @@ To set up the TLS key pair and certificate for the cluster:
    openssl req -text -noout -verify -in ./request1.csr
    ```
    The contents should resemble the following:
-   ```properties
+   ```shell
    -----BEGIN CERTIFICATE REQUEST-----
    MIIDkjCCAfwCAQAwLjELMAkGA1UEBhMCR0IxDzANBgNVBAcTBkxvbmRvbjEOMAwG
    A1UEAxMFQWxpY2UwggGiMA0GCSqGSIb3DQEBAQUAA4IBjwAwggGKAoIBgQChJ9CW
@@ -414,7 +414,7 @@ You can also optionally set the session certificate trustroot using the property
 
 {{< note >}}
 * If using session certificates for the P2P layer, see [Configuring Optional Session Certificates](session-certificates.html#build-registration-context-for-mgm-registration) for information about the additional JSON fields required.
-* If using mutual TLS, you must set the `corda.group.tls.type` field to `Mutual`.
+* If using mutual TLS, you must set the `corda.group.tls.type` field to `Mutual`. For more information, see [Configuring Mutual TLS](mutual-tls.html#set-the-tls-type-in-the-mgm-context). 
 {{< /note >}}
 
 ### Build Registration Context Using Bash

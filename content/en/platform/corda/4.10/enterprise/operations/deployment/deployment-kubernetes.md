@@ -54,7 +54,7 @@ The deployed network runs on Kubernetes minimum version 1.16.9 and Helm minimum 
 ### Deployment overview
 
 The provided deployment runs all CENM services run inside a single, dedicated Kubernetes namespace (default name:`cenm`).
-Each service runs in its own dedicated Kubernetes pod, with the exception of the [Angel Service](../../../../1.5/cenm/angel-service.md), which runs in the same pod as its managed service.
+Each service runs in its own dedicated Kubernetes pod, with the exception of the [Angel Service]({{< relref "../../../../1.5/cenm/angel-service.md" >}}), which runs in the same pod as its managed service.
 
 {{< note >}}
 Naturally, the following command will not show a dedicated Angel Service pod:
@@ -105,7 +105,7 @@ The deployment steps are given below:
 
 - Install [Docker](https://www.docker.com/get-started). Docker is required to run the CENM CLI tool.
 
-- Download the Docker image with CENM [Command-Line Interface (CLI) tool](../../../../1.5/cenm/cenm-cli-tool.md) so you can manage CENM services:
+- Download the Docker image with CENM [Command-Line Interface (CLI) tool]({{< relref "../../../../1.5/cenm/cenm-cli-tool.md" >}}) so you can manage CENM services:
 
     ```bash
     docker pull corda/enterprise-cenm-cli:1.5.4-zulu-openjdk8u242
@@ -199,7 +199,7 @@ cd k8s/helm
 
 ## Network operations
 
-Use the CENM [Command Line Interface (CLI) Tool](../../../../1.5/cenm/cenm-cli-tool.md) to access the [Gateway Service](../../node/gateway-service.md) from your local machine.
+Use the CENM [Command Line Interface (CLI) Tool]({{< relref "../../../../1.5/cenm/cenm-cli-tool.md" >}}) to access the [Gateway Service]({{< relref "../../node/gateway-service.md" >}}) from your local machine.
 To start the CENM CLI Tool, run Docker command starting a Docker container with the tool:
 
   ```bash
@@ -222,7 +222,7 @@ You can now use `cemn` commands from within the running Docker container:
   ./cenm context login -s -u <USER> -p <PASSWORD> http://<GATEWAY-SERVICE-IP>:8080
   ```
 
-The [Gateway Service](../../node/gateway-service.md) is a gateway between the [Auth Service](../../node/auth-service.md) and front-end services in CENM. It allows you to perform all network operations on the [Identity Manager Service](../../../../1.5/cenm/identity-manager.md), the [Network Map Service](../../../../1.5/cenm/network-map.md), and the [Signing Service](../../../../1.5/cenm/signing-service.md).
+The [Gateway Service]({{< relref "../../node/gateway-service.md" >}}) is a gateway between the [Auth Service]({{< relref "../../node/auth-service.md" >}}) and front-end services in CENM. It allows you to perform all network operations on the [Identity Manager Service]({{< relref "../../../../1.5/cenm/identity-manager.md" >}}), the [Network Map Service]({{< relref "../../../../1.5/cenm/network-map.md" >}}), and the [Signing Service]({{< relref "../../../../1.5/cenm/signing-service.md" >}}).
 The IP address is dynamically allocated for each deployment and can be found with `kubectl get svc`.
 Use the following command to ensure that you are pointing at the correct namespace:
 
@@ -286,7 +286,7 @@ kubectl get pods -o wide
 You will find the truststore password in the `signer/files/pki.conf`, where the default value used in this Helm chart is `trust-store-password`.
 
 {{< note >}} For more details about joining a CENM network, see:
-[Joining an existing compatibility zone](../../network/joining-a-compatibility-zone.md).
+[Joining an existing compatibility zone]({{< relref "../../network/joining-a-compatibility-zone.md" >}}).
 {{< /note >}}
 
 ### Display logs
@@ -332,10 +332,10 @@ database {
 
 ### Update network parameters
 
-Use the CENM [Command-Line (CLI) tool](../../../../1.5/cenm/cenm-cli-tool.md) to run commands to update the network parameters.
+Use the CENM [Command-Line (CLI) tool]({{< relref "../../../../1.5/cenm/cenm-cli-tool.md" >}}) to run commands to update the network parameters.
 
-See the CENM documentation for more information about the list of available [network parameters](../../../../1.5/cenm/config-network-parameters.md)
-and instructions on [updating network parameters](./updating-network-parameters.md).
+See the CENM documentation for more information about the list of available [network parameters]({{< relref "../../../../1.5/cenm/config-network-parameters.md" >}})
+and instructions on [updating network parameters]({{< relref "./updating-network-parameters.md" >}}).
 
 ### Run Flag Day
 
@@ -347,7 +347,7 @@ This operation is scheduled to take place at regular intervals (by default, once
 
 ### Signing Service configuration
 
-The Signing Service is not managed by the [Angel Service](../../../../1.5/cenm/angel-service.md) in this deployment, therefore any CENM Command-Line Interface (CLI) tool commands trying to change the Signing Service configuration will take no effect.
+The Signing Service is not managed by the [Angel Service]({{< relref "../../../../1.5/cenm/angel-service.md" >}}) in this deployment, therefore any CENM Command-Line Interface (CLI) tool commands trying to change the Signing Service configuration will take no effect.
 To change the Singing Service configuration, you must log in to a Kubernetes pod, update the configuration file, and restart the service.
 
 ## Delete Network
@@ -387,7 +387,7 @@ generated by the PKI tool.
 
 Once you have created an Azure Key Vault that you want to use, perform the following steps:
 
-1. Modify the HSM pod configuration to contain the required library `.jar` files.
+1. Modify the HSM pod configuration to contain the required library JAR files.
 2. Modify PKI `values.yaml` configuration file.
 3. Modify Signing Service `values.yaml` configuration file.
 4. Start the deployment as normal. The deployment may take more time than usual this way, due to the communication with the key vault.
@@ -396,8 +396,8 @@ Once you have created an Azure Key Vault that you want to use, perform the follo
 
 The HSM pod is a helper pod, which loads a defined Docker image and attempts to load the folder containing the HSM-related
 files as a volume for the other pods to use. Follow the steps below:
-1. <a href="../../../../../../../en/platform/corda/1.5/cenm/signing-service.html#azure-key-vault">Create the library `.jar`</a>
-2. Create a Docker image containing the `.jar` file and the `.pkcs12` file used as the key store path.
+1. <a href="../../../../../../../en/platform/corda/1.5/cenm/signing-service.html#azure-key-vault">Create the library JAR</a>
+2. Create a Docker image containing the JAR file and the `.pkcs12` file used as the key store path.
 
 The Docker image and the directory where these files are stored must be specified in the relevant variables in the HSM `values.yaml` file.
 Note that you may need to add permissions to your cluster to download the Docker image successfully.
@@ -463,7 +463,7 @@ helm install cenm-database bitnami/postgresql
 
 Follow the instructions displayed by the script output to connect to the database server via `psql`.
 You can create a separate database server for each CENM service by running the Helm script multiple times with different names
-and then setting up the database user/schema, following the instructions in the [CENM database setup](../../../../1.5/cenm/database-set-up.md) section.
+and then setting up the database user/schema, following the instructions in the [CENM database setup]({{< relref "../../../../1.5/cenm/database-set-up.md" >}}) section.
 Alternatively, you can create several databases inside the single PostgresSQL server you have just deployed, by running
 the following DDL commands:
 
@@ -484,7 +484,7 @@ In the `values.yml` file, edit the database section of the configuration to chan
 
 The deployed service already contains JDBC drivers for PostgreSQL and SQLServer.
 For an Oracle database, you need to extend the Docker images for the service by adding
-the Oracle JDBC driver `.jar` file to the `/opt/${USER}/drivers/` directory.
+the Oracle JDBC driver JAR file to the `/opt/${USER}/drivers/` directory.
 
 {{< note >}}
 The bootstrap script cannot be used with an external database.

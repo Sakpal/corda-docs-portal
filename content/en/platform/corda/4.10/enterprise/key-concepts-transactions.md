@@ -7,7 +7,7 @@ date: '2020-04-07T12:00:00Z'
 menu:
   corda-enterprise-4-10:
     identifier: corda-enterprise-4-10-key-concepts-transactions
-    parent: corda-enterprise-4-10-key-concepts
+    parent: corda-enterprise-key-concepts-4-10
     weight: 1040
 tags:
 - concepts
@@ -158,7 +158,7 @@ You might have a large piece of data that can be reused for several transactions
 * A table of currency codes.
 
 You can achieve this with *attachments*. Transactions can refer to attachments by the attachment's [hash](https://www.investopedia.com/terms/h/hash.asp). These
-attachments are `.zip` or `.jar` files with content that the node can use when verifying a [smart contract](key-concepts-contracts.md).
+attachments are `.zip` or JAR files with content that the node can use when verifying a [smart contract](key-concepts-contracts.md).
 
 ### Time windows
 

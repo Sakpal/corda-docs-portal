@@ -42,7 +42,7 @@ desire to avoid using up a thread for every flow instantiation.
 implies that the state of the flow must be persisted to disk.
 * Error handling.
 * Message routing.
-* Serialisation.
+* Serialization.
 * Catching type errors, in which the developer gets temporarily confused and expects to receive/send one type of message
 when actually they need to receive/send another.
 * Unit testing of the finished flow.
@@ -660,8 +660,7 @@ loaded off disk again.
 {{< warning >}}
 If a node has flows still in a suspended state, with flow continuations written to disk, it will not be
 possible to upgrade that node to a new version of Corda or your app, because flows must be completely “drained”
-before an upgrade can be performed, and must reach a finished state for draining to complete (see
-[Draining the node](upgrading-cordapp.html#draining-the-node) for details). While there are mechanisms for “evolving” serialised data held
+before an upgrade can be performed, and must reach a finished state for draining to complete (see [Draining the node]({{< relref "../enterprise/node-upgrade-notes.md#step-1-drain-the-node" >}}) for details). While there are mechanisms for “evolving” serialised data held
 in the vault, there are no equivalent mechanisms for updating serialised checkpoint data. For this
 reason it is not a good idea to design flows with the intention that they should remain in a suspended
 state for a long period of time, as this will obstruct necessary upgrades to Corda itself. Any

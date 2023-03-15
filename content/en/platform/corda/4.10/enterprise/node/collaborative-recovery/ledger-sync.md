@@ -52,7 +52,7 @@ The **LedgerSync** CorDapp requires participating Corda nodes to
  - be using Corda Enterprise, not Corda Open Source (OS); and
  - be using Corda Minimum Platform Version (MPV) >= 6; and
  - have the matching version of the LedgerGraph CorDapp installed; and
- - running on top of a supported [database technology](../../platform-support-matrix.md).
+ - running on top of a supported [database technology]({{< relref "../../platform-support-matrix.md" >}}).
 
 {{< note >}}
 This version of LedgerSync is compatible with Corda's Archiving functionality. If you or parties on your network use Archiving, you can find out [what to expect when running ledger sync here](#integration-with-archiving).
@@ -63,7 +63,7 @@ This version of LedgerSync is compatible with Corda's Archiving functionality. I
 
 You can adjust LedgerSync behaviour using the configuration parameters listed below. If the configuration parameter is not specified, or the configuration file is not present, the default values are used.
 
-You can configure LedgerSync, like other CorDapps, by creating a configuration file named after the LedgerSync configuration `.jar` file. For example, if the LedgerSync `.jar` file is called `ledger-sync-1.0.jar`, the configuration file would be `<corda_node_dir>/cordapps/config/ledger-sync-1.0.conf`.
+You can configure LedgerSync, like other CorDapps, by creating a configuration file named after the LedgerSync configuration JAR file. For example, if the LedgerSync JAR file is called `ledger-sync-1.0.jar`, the configuration file would be `<corda_node_dir>/cordapps/config/ledger-sync-1.0.conf`.
 
 
 ### Example configuration file contents

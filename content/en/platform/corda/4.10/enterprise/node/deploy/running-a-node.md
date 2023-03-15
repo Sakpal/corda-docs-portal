@@ -33,13 +33,13 @@ By default, the node will look for a configuration file called `node.conf` and a
 in the current working directory. You can override the configuration file and workspace paths on the command line (e.g.
 `./corda.jar --config-file=test.conf --base-directory=/opt/corda/nodes/test`).
 
-If you need to initialise or migrate the node's database schema objects, you need to run the `run-migration-scripts` sub-command. See [Node command-line options](../node-commandline.md) for details.
+If you need to initialise or migrate the node's database schema objects, you need to run the `run-migration-scripts` sub-command. See [Node command-line options]({{< relref "../node-commandline.md" >}}) for details.
 
 {{< note >}}
 If your node configuration file is obfuscated and you want to deobfuscate it when running the node, you need to pass the
 obfuscation seed and passphrase to the node in the node run command.
 
-To do so using the [Configuration Obfuscator](../../tools-config-obfuscator.md) command-line tool, use the
+To do so using the [Configuration Obfuscator]({{< relref "../../tools-config-obfuscator.md" >}}) command-line tool, use the
 `--config-obfuscation-seed` and `--config-obfuscation-passphrase` flags, respectively, in your node run command.
 
 The following example shows how to pass a seed and a passphrase explicitly to a node component using the Configuration
@@ -66,14 +66,14 @@ anything set earlier.
 
 
 * **Default arguments in capsule**:
-The capsuled Corda node has default flags set to `-Xmx512m -XX:+UseG1GC` - this gives the node a relatively
+The capsuled Corda node has default flags set to `-Xmx512m -XX:+UseG1GC`. This gives the node a relatively
 low 512 MB of heap space, and turns on the G1 garbage collector, ensuring low pause times for garbage collection.
 
 When `devMode` is explicitly set to `false`, the default node memory size will be enlarged to 4G: `-Xmx4G -XX:+UseG1GC`.
 
 
 * **Node configuration**:
-The node configuration file can specify custom default JVM arguments by adding a section like the one below:
+The node configuration file can specify custom default JVM arguments by adding a section like the following:
 
 ```none
 custom = {
@@ -97,7 +97,7 @@ java -Dcapsule.jvm.args="-Xmx1G" -jar corda.jar
 Setting a property like this will override any value for this property, but not interfere with any other JVM arguments that are configured
 in any way mentioned above. In this example, it resets the maximum heap memory to `-Xmx1G` but it does not touch the garbage collector settings.
 This is particularly useful for either setting large memory allowances that you don’t want to give to the launcher, or for setting values that
-can only be set on one process at a time - for example, a debug port.
+can only be set on one process at a time; for example, a debug port.
 
 
 * **Command line flag**:
@@ -174,19 +174,22 @@ Parameters:
 * `--network-root-truststore-password`, `-p`: Network root trust store password obtained from the network operator.
 * `--skip-schema-creation`: Skips the default database migration step.
 
-`run-migration-scripts`: from version 4.6, a Corda node can no longer modify/create schema on the fly in normal run mode - schema setup or changes must be
+{{< note >}}
+Node `initial-registration` now includes the creation of `identity-private-key` keystore alias. For more information, see [node folder structure]({{< relref "../../node/setup/node-structure.md" >}}). Previously, only `cordaclientca` and `cordaclienttls` aliases were created during `initial-registration`, while `identity-private-key` was generated on demand on the first node run. Hence, in Corda 4.8 the content of `nodekeystore.jks` is never altered during a regular node run (except for `devMode = true`, where the certificates directory can be filled with pre-configured keystores).
+{{< /note >}}
+`run-migration-scripts`: From version 4.6, a Corda node can no longer modify/create schema on the fly in normal run mode - schema setup or changes must be
 applied deliberately using this sub-command. It runs the database migration script for the requested schema set defined in the following parameters. Once it creates or modifies the schema(s), the sub-command will exit.
 
 Parameters:
 
-* `--core-schemas`: use to run the core database migration script for the node database. Core schemas cannot be migrated while there are checkpoints.
-* `--app-schemas`: use to run the app database migration script for CorDapps. To force an app schema to migrate with checkpoints present, use the `--update-app-schema-with-checkpoints` flag alongside the `run-migration-scripts` sub-command.
+* `--core-schemas`: Used to run the core database migration script for the node database. Core schemas cannot be migrated while there are checkpoints.
+* `--app-schemas`: Used to run the app database migration script for CorDapps. To force an app schema to migrate with checkpoints present, use the `--update-app-schema-with-checkpoints` flag alongside the `run-migration-scripts` sub-command.
 
 `generate-node-info`: Performs the node start-up tasks necessary to generate the `node.info` file, saves it to disk, then exits.
 
 `generate-rpc-ssl-settings`: Generates the SSL keystore and truststore for a secure RPC connection.
 
-`install-shell-extensions`: Installs a `corda` alias and auto completion for `bash` and `zsh`. For more information, see [Shell extensions for CLI Applications](../operating/cli-application-shell-extensions.md).
+`install-shell-extensions`: Installs a `corda` alias and auto completion for `bash` and `zsh`. For more information, see [Shell extensions for CLI Applications]({{< relref "../operating/cli-application-shell-extensions.md" >}}).
 
 `validate-configuration`: Validates the actual configuration without starting the node.
 
@@ -206,13 +209,14 @@ To enable export of JMX metrics over HTTP via [Jolokia](https://jolokia.org/), r
 
 `java -Dcapsule.jvm.args="-javaagent:drivers/jolokia-jvm-1.3.7-agent.jar=port=7005" -jar corda.jar`
 
-This command will start the node with JMX metrics accessible via HTTP on port 7005.
+This command will start the node with JMX metrics accessible via HTTP on port 7005.  
+
+The status is published as: `net.corda.Node.Status`, and is available almost immediately at startup.
 
 See [Monitoring via Jolokia](../operating/node-administration.html#monitoring-via-jolokia) for further details.
 
 
 ## Starting all nodes at once on a local machine from the command prompt
-
 
 ### Native
 
@@ -268,9 +272,9 @@ To create nodes locally and run on a remote machine, perform the following steps
 * Configure a Cordform task and deploy the nodes locally as described in [Creating nodes locally](generating-a-node.md).
 * Copy the generated directory structure to a remote machine, for example using Secure Copy.
 * Optionally, add database configuration settings if they could not be configured in the first step and the local machine does not have access to the remote database.
-In each top-level `[NODE NAME]_node.conf` configuration file, add the database settings and copy the JDBC driver `.jar` file (if required).
+In each top-level `[NODE NAME]_node.conf` configuration file, add the database settings and copy the JDBC driver JAR file (if required).
 Edit the top-level `[NODE NAME]_node.conf` files only and not the files inside the node sub-directories (for example, `node.conf`).
-* Optionally, bootstrap the network on the remote machine. This is an optional step when a remote machine does not accept `localhost` addresses, or if the generated nodes are configured to run on another host’s IP address. If needed, change the host addresses in the top-level configuration files `[NODE NAME]_node.conf` for entries `p2pAddress`, `rpcSettings.address`, and  `rpcSettings.adminAddress`. Run the network bootstrapper tool to regenerate the nodes network map: `java -jar corda-tools-network-bootstrapper-Master.jar --dir <nodes-root-dir>`. For more information, see [Network bootstrapper](../../network-bootstrapper.md).
+* Optionally, bootstrap the network on the remote machine. This is an optional step when a remote machine does not accept `localhost` addresses, or if the generated nodes are configured to run on another host’s IP address. If needed, change the host addresses in the top-level configuration files `[NODE NAME]_node.conf` for entries `p2pAddress`, `rpcSettings.address`, and  `rpcSettings.adminAddress`. Run the network bootstrapper tool to regenerate the nodes network map: `java -jar corda-tools-network-bootstrapper-Master.jar --dir <nodes-root-dir>`. For more information, see [Network bootstrapper]({{< relref "../../network-bootstrapper.md" >}}).
 * Run nodes on the remote machine using [runnodes command](#starting-all-nodes-at-once-on-a-local-machine-from-the-command-prompt).
 
 The steps described above enable you to create the same test deployment as a `deployNodes` Gradle task would create on a local machine.
@@ -279,9 +283,9 @@ The steps described above enable you to create the same test deployment as a `de
 ## Database migrations
 
 Depending on the versions of Corda and of the CorDapps used, database migration scripts might need to run before a node is able to start.
-For more information, see [Database management](../../node-database-intro.md).
+For more information, see [Database management]({{< relref "../../node-database-intro.md" >}}).
 
-If you need to initialise or migrate the node's database schema objects, you need to run the `run-migration-scripts` sub-command. See [Node command-line options](../node-commandline.md) for details.
+If you need to initialise or migrate the node's database schema objects, you need to run the `run-migration-scripts` sub-command. See [Node command-line options]({{< relref "../node-commandline.md" >}}) for details.
 
 
 ## Stability of the Corda Node
