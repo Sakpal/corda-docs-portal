@@ -41,7 +41,7 @@ notary {
 
       dataSourceProperties {
           autoCommit="false"
-          jdbcUrl="jdbc:dbidentifier://{{ your cluster IPs }}/{{ DB name, e.g. corda }}"
+          jdbcUrl="jdbc:dbidentifier://{{ [IP1]:[Port1],[IP2]:[Port2],[IP3]:[Port3] }}/{{ DB name, e.g. corda }}"
           username={{ DB username }}
           password={{ DB password }}
       }
