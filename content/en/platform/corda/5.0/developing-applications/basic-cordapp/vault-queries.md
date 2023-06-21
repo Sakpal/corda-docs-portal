@@ -121,9 +121,9 @@ After the output state has been finalised it will be represented as the followin
 }
 ```
 
- {{< note >}}
-    The `net.corda.v5.ledger.utxo.ContractState` field will always be part of the JSON representation no matter which state type we are using.
- {{< /note >}}
+{{< note >}}
+The `net.corda.v5.ledger.utxo.ContractState` field will always be part of the JSON representation no matter which state type we are using.
+{{< /note >}}
 
 We will use this representation to create our vault named queries in the next section.
 
@@ -179,10 +179,10 @@ This function will be called on startup and we should define how our query will 
 
 * To create a vault named query with a given name, in our case it's `DUMMY_CUSTOM_QUERY`, call `vaultNamedQueryBuilderFactory.create()`.
 * To define how a query's `WHERE` clause will work, call `whereJson()`.
-    {{< note >}}
-    Always start with the actual `WHERE` statement and then write the rest of the clause. Fields need to be prefixed with the `visible_states. qualifier`. Since `visible_states.custom_representation` is a JSON column, we can use some JSON specific  operations, more info here.
-     * Parameters can be used in the query in a :parameter format. We are using a parameter called :testField which we will be able to set when executing this query. This works similarly to popular Java SQL libraries such as Hibernate.
-    {{< /note >}}
+* {{< note >}}
+  Always start with the actual `WHERE` statement and then write the rest of the clause. Fields need to be prefixed with the `visible_states. qualifier`. Since `visible_states.custom_representation` is a JSON column, we can use some JSON specific  operations, more info here.
+  * Parameters can be used in the query in a :parameter format. We are using a parameter called :testField which we will be able to set when executing this query. This works similarly to popular Java SQL libraries such as Hibernate.
+  {{< /note >}}
 * To finalise query creation and to store the created query in the registry to be executed later, call `register()`. This call needs to be the last step when defining a query.
 
 ### Filtering, transforming and collecting (a complex query example)
@@ -365,8 +365,6 @@ To instantiate our query we need to call the following:
 utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Int::class.java)
 ```
 
-or
-
 ```java
 utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Integer.class)
 ```
@@ -377,10 +375,7 @@ Before executing we can define a couple things:
 
 * Which index our result set should start (`setOffset`), default 0.
 * How many results should our query return (`setLimit`), default Int.MAX (2,147,483,647).
-* Define named parameters that are in our query and the actual value for them.
-    {{< note >}}
-    All parameters must be defined otherwise the execution will fail. (`setParameter` or `setParameters`)
-    {{</ note >}}
+* Define named parameters that are in our query and the actual value for them. {{< note >}} All parameters must be defined otherwise the execution will fail. (`setParameter` or `setParameters`) {{</ note >}}
 * Each state in the database has a timestamp value for when it was inserted. With this we can set an * upper limit to only return states that were inserted before a given time. (`setTimestampLimit`)
 
 In our case this would look like this:
