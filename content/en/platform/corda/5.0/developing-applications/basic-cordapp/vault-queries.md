@@ -127,7 +127,7 @@ The `net.corda.v5.ledger.utxo.ContractState` field will always be part of the JS
 
 We will use this representation to create our vault named queries in the next section.
 
-## How to Create and Register a Vault Named Query?
+## How to Create and Register a Vault Named Query
 
 The vault named queries has two crucial elements. The first one is registration, this means the query will be stored on sandbox creation time and can be executed later on.
 
@@ -183,23 +183,25 @@ This function will be called on startup and we should define how our query will 
   Always start with the actual `WHERE` statement and then write the rest of the clause. Fields need to be prefixed with the `visible_states. qualifier`. Since `visible_states.custom_representation` is a JSON column, we can use some JSON specific  operations, more info here.
   * Parameters can be used in the query in a :parameter format. We are using a parameter called :testField which we will be able to set when executing this query. This works similarly to popular Java SQL libraries such as Hibernate.
   {{< /note >}}
-* To finalise query creation and to store the created query in the registry to be executed later, call `register()`. This call needs to be the last step when defining a query.
+* To finalize query creation and to store the created query in the registry to be executed later, call `register()`. This call needs to be the last step when defining a query.
 
-### Filtering, transforming and collecting (a complex query example)
+### Complex Query Example
 
-We are going to use the same state as in the first example just evolve our query a little bit. Let’s say we want to add some extra logic to our query:
+ Let’s say we want to add some extra logic to our query:
 
 * Only keep the results that have “Alice” in their participant list.
 * Transform the result set to only keep the transaction IDs.
-* Collect the result set into one single integer (number of results).
+* Collect the result set into one single integer.
 
-These optional logics will always be applied in the following order (no matter in which order they are called):
+These optional logics will always be applied in the following order:
 
 1. Filtering
 2. Transforming
 3. Collecting
 
+{{< note >}}
 The query `whereJson` will return `StateAndRef` objects and the data going into the filtering and transforming logic consists of `StateAndRefs`.
+{{< /note >}}
 
 #### Filtering
 
