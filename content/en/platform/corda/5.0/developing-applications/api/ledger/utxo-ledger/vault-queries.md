@@ -1,17 +1,18 @@
 ---
-date: '2023-05-03'
+date: '2023-06-20'
+version: 'Corda 5.0 Beta 4'
 title: "Vault Queries"
-version: 'Corda 5.0'
 menu:
   corda5:
-    identifier: corda5-develop-first-cordapp-vault-queries
-    parent: corda5-develop-first-cordapp
-    weight: 6000
+    identifier: corda5-api-vault-queries
+    parent: corda5-api-ledger-utxo
+    weight: 3000
+section_menu: corda5
 ---
 
 # Vault Queries
 
-## What is a Vault Named Query?
+## What is a Vault Named Query
 
 A vault named query is essentially a database query that can be defined by Corda users. The user can define the following:
 
@@ -22,13 +23,13 @@ A vault named query is essentially a database query that can be defined by Corda
 * Optional collection logic of the result set
 * The query creator needs to follow a few pre-defined steps in order for the query to be registered and to be usable.
 
-## How a State is Represented in the Database?
+## How a State is Represented in the Database
 
 Each state type can be represented as a JSON string (`custom_representation` column in the database), we can use that JSON representation to write our vault named queries. However, this representation needs to be pre-defined.
 
  In order to do that we need an implementation of the `net.corda.v5.ledger.utxo.query.json.ContractStateVaultJsonFactory<T>` interface. The `<T>` parameter is the type of the state we want to represent.
 
-Let’s say we have a very simple state type called `TestState` and a simple contract called `TestContract`. We’ll use this state throughout this documentation. It would look like this:
+Let’s say we have a very simple state type called `TestState` and a simple contract called `TestContract` it would look like the following: 
 
 ```kotlin
 package com.r3.corda.demo.contract
@@ -358,7 +359,7 @@ The collector always need to be the last one in the chain as all previous filter
 
 Now that we have our query registered, it’s time to execute it.
 
-### How to Execute a Vault Named Query?
+### How to Execute a Vault Named Query
 
 To execute a query we need to use the `UtxoLedgerService`. This can be injected to a flow via `@CordaInject`.
 To instantiate our query we need to call the following:
