@@ -25,11 +25,11 @@ A vault named query is essentially a database query that can be defined by Corda
 
 ## How a State is Represented in the Database
 
-Each state type can be represented as a JSON string (`custom_representation` column in the database), we can use that JSON representation to write our vault named queries. However, this representation needs to be pre-defined.
+Each state type can be represented as a JSON string (`custom_representation` column in the database), use that JSON representation to write the vault named queries. However, this representation needs to be pre-defined.
 
- In order to do that we need an implementation of the `net.corda.v5.ledger.utxo.query.json.ContractStateVaultJsonFactory<T>` interface. The `<T>` parameter is the type of the state we want to represent.
+Implement the `net.corda.v5.ledger.utxo.query.json.ContractStateVaultJsonFactory<T>` interface. The `<T>` parameter is the type of the state we want to represent.
 
-Let’s say we have a very simple state type called `TestState` and a simple contract called `TestContract` it would look like the following: 
+For example, a state type called `TestState` and a simple contract called `TestContract` it would look like the following:
 
 ```kotlin
 package com.r3.corda.demo.contract
@@ -79,9 +79,9 @@ public class TestState implements ContractState {
 }
 ```
 
-This contract has no verification logic and should only be used for testing purposes. The state itself has a `testField` property defined that we use for JSON representation and when constructing our query.
+This contract has no verification logic and should only be used for testing purposes. The state itself has a `testField` property defined for JSON representation and when constructing query.
 
-We want to represent our state as a JSON string. Since our state has only one property (`testField`) the `ContractStateVaultJsonFactory` implementation is rather simple:
+To represent a state as a JSON string, use `ContractStateVaultJsonFactory` and do the following:
 
 ```kotlin
 class TestStateJsonFactory : ContractStateVaultJsonFactory<TestState> {
@@ -109,7 +109,7 @@ class TestUtxoStateJsonFactory implements ContractStateVaultJsonFactory<TestUtxo
 }
 ```
 
-After the output state has been finalised it will be represented as the following in the database (`custom_representation column`):
+After the output state has been finalized it will be represented as the following in the database (`custom_representation column`):
 
 ```java
 {
@@ -123,14 +123,14 @@ After the output state has been finalised it will be represented as the followin
 ```
 
 {{< note >}}
-The `net.corda.v5.ledger.utxo.ContractState` field will always be part of the JSON representation no matter which state type we are using.
+The `net.corda.v5.ledger.utxo.ContractState` field is always a part of the JSON representation no matter which state type we are using.
 {{< /note >}}
 
-We will use this representation to create our vault named queries in the next section.
+Use this representation to create the vault named queries in the next section.
 
 ## How to Create and Register a Vault Named Query
 
-The vault named queries has two crucial elements. The first one is registration, this means the query will be stored on sandbox creation time and can be executed later on.
+Registration means the query is stored on sandbox creation time and can be executed later on.
 
 Vault named queries need to be part of a contract CPK. The contract CPK needs to be uploaded in order for a vault named query to be installed.
 
@@ -171,14 +171,13 @@ public class JsonQueryFactory implements VaultNamedQueryFactory {
 }
 ```
 
-Let’s analyse this code snippet a bit more in depth. 
-As mentioned above, we are inheriting from the interface called `VaultNamedQueryFactory`, this interface has one method:
+The interface called `VaultNamesQueryFactory` has one method:
 
 `void create(@NotNull VaultNamedQueryBuilderFactory vaultNamedQueryBuilderFactory);`
 
-This function will be called on startup and we should define how our query will operate in it with the following steps:
+This function is called upon startup and should define how a query will operate in it with the following steps:
 
-* To create a vault named query with a given name, in our case it's `DUMMY_CUSTOM_QUERY`, call `vaultNamedQueryBuilderFactory.create()`.
+* To create a vault named query with a given name, in this case it is `DUMMY_CUSTOM_QUERY`, call `vaultNamedQueryBuilderFactory.create()`.
 * To define how a query's `WHERE` clause will work, call `whereJson()`.
   {{< note >}}
   Always start with the actual `WHERE` statement and then write the rest of the clause. Fields need to be prefixed with the `visible_states. qualifier`. Since `visible_states.custom_representation` is a JSON column, we can use some JSON specific  operations, more info here.
@@ -188,7 +187,7 @@ This function will be called on startup and we should define how our query will 
 
 ### Complex Query Example
 
- Let’s say we want to add some extra logic to our query:
+ To add some extra logic to the query:
 
 * Only keep the results that have “Alice” in their participant list.
 * Transform the result set to only keep the transaction IDs.
@@ -206,13 +205,13 @@ The query `whereJson` will return `StateAndRef` objects and the data going into 
 
 #### Filtering
 
-To create a filtering logic we need to implement the `net.corda.v5.ledger.utxo.query.VaultNamedQueryStateAndRefFilter<T>` interface. The `<T>` type here is the state type that will be returned from the database, in our case it’s `TestState`. This interface has only one function:
+To create a filtering logic implement the `net.corda.v5.ledger.utxo.query.VaultNamedQueryStateAndRefFilter<T>` interface. The `<T>` type here is the state type that will be returned from the database, in this case it’s `TestState`. This interface has only one function:
 
 `@NotNull Boolean filter(@NotNull StateAndRef<T> data, @NotNull Map<String, Object> parameters);`
 
 This will define whether or not to keep the given element (`row`) from the result set. Elements returning true will be kept and the rest will be discarded.
 
-In our example we want to keep the elements that have “Alice” in their participant list. This filter would look like this:
+In this example, keep the elements that have “Alice” in their participant list. This filter would look like this:
 
 ```kotlin
 class DummyCustomQueryFilter : VaultNamedQueryStateAndRefFilter<TestState> {
@@ -235,7 +234,7 @@ class DummyCustomQueryFilter implements VaultNamedQueryStateAndRefFilter<TestUtx
 
 #### Transforming
 
-We can create a transformer class to make sure to only keep the transaction IDs of each record. Transformer classes need to implement the `VaultNamedQueryStateAndRefTransformer<T, R>` interface. The `<T>` is the type of results returned from the database, in our case `TestState` and `<R>` is the type we are going to transform our results into and we want to have transaction IDs which are `Strings`.
+To create a transformer class make sure to only keep the transaction IDs of each record. Transformer classes need to implement the `VaultNamedQueryStateAndRefTransformer<T, R>` interface. The `<T>` is the type of results returned from the database, in this case `TestState` and `<R>` is the type to transform our results into and to have transaction IDs which are `Strings`.
 
 This interface has one function:
 
@@ -244,8 +243,7 @@ This interface has one function:
 `R transform(@NotNull T data, @NotNull Map<String, Object> parameters);
 ```
 
-This will define how each record (“row”) will be transformed (mapped).
-Our transformer will look something like this:
+This will define how each record (“row”) will be transformed (mapped):
 
 ```kotlin
 
@@ -271,9 +269,9 @@ This will transform each element to a `String` object which is the given state�
 
 #### Collecting
 
-We want to collect our result set into one single integer.
+To collect results set into one single integer.
 
-For this, we need the `net.corda.v5.ledger.utxo.query.VaultNamedQueryCollector<R, T>` interface. The `<R>` parameter is the type of the original result set (in our case `String` because of our transformation) and `<T>` is the type we’ll collect into (in our case this is an `Int`).
+For this, implement the `net.corda.v5.ledger.utxo.query.VaultNamedQueryCollector<R, T>` interface. The `<R>` parameter is the type of the original result set (in this case `String` because of transformation) and `<T>` is the type  collected into (in our case this is an `Int`).
 
 This interface has only one method:
 
@@ -282,7 +280,7 @@ This interface has only one method:
 Result<T> collect(@NotNull List<R> resultSet, @NotNull Map<String, Object> parameters);
 ```
 
-This will define how we collect our result set, the collector class should look like the following:
+This will define how to collect the result set, the collector class should look like the following:
 
 ```kotlin
 class DummyCustomQueryCollector : VaultNamedQueryCollector<String, Int> {
@@ -318,7 +316,7 @@ class DummyCustomQueryCollector implements VaultNamedQueryCollector<String, Inte
 
 #### Registering our Complex Query
 
-In the following example we will register a complex query with a filter, a transformer, and a collector:
+ Register a complex query with a filter, a transformer, and a collector with the following example:
 
 ```kotlin
 class DummyCustomQueryFactory : VaultNamedQueryFactory {
@@ -354,15 +352,13 @@ public class JsonQueryFactory implements VaultNamedQueryFactory {
 ```
 
 {{< note >}}
-The collector always need to be the last one in the chain as all previous filtering and mapping functionality will be applied before collecting.
+The collector always needs to be the last one in the chain as all previous filtering and mapping functionality will be applied before collecting.
 {{< /note >}}
-
-Now that we have our query registered, it’s time to execute it.
 
 ### How to Execute a Vault Named Query
 
-To execute a query we need to use the `UtxoLedgerService`. This can be injected to a flow via `@CordaInject`.
-To instantiate our query we need to call the following:
+To execute a query use `UtxoLedgerService`. This can be injected to a flow via `@CordaInject`.
+To instantiate a query call the following:
 
 ```kotlin
 utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Int::class.java)
@@ -372,16 +368,16 @@ utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Int::class.java)
 utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Integer.class)
 ```
 
-We provide the name of our query (in our case `DUMMY_CUSTOM_QUERY`) and the return type. Since we collected our result set into an integer in the complex query example we will use `Int` (or `Integer` in Java).
+Provide the name of the query (in this case `DUMMY_CUSTOM_QUERY`) and the return type. Since the result set is collected into an integer in the complex query example use `Int` (or `Integer` in Java).
 
-Before executing we can define a couple things:
+Before executing define the following:
 
-* Which index our result set should start (`setOffset`), default 0.
-* How many results should our query return (`setLimit`), default Int.MAX (2,147,483,647).
-* Define named parameters that are in our query and the actual value for them. {{< note >}} All parameters must be defined otherwise the execution will fail. (`setParameter` or `setParameters`) {{</ note >}}
-* Each state in the database has a timestamp value for when it was inserted. With this we can set an * upper limit to only return states that were inserted before a given time. (`setTimestampLimit`)
+* Which index the result set should start (`setOffset`), default 0.
+* How many results should the query return (`setLimit`), default Int.MAX (2,147,483,647).
+* Define named parameters that are in the query and the actual value for them. {{< note >}} All parameters must be defined otherwise the execution will fail. (`setParameter` or `setParameters`) {{</ note >}}
+* Each state in the database has a timestamp value for when it was inserted. Set an * upper limit to only return states that were inserted before a given time. (`setTimestampLimit`)
 
-In our case this would look like this:
+In this case it would look like this:
 
 ```kotlin
 val resultSet = utxoLedgerService.query("DUMMY_CUSTOM_QUERY", Int::class.java) // instantiate the query
@@ -402,7 +398,7 @@ PagedQuery.ResultSet<Integer> resultSet = utxoLedgerService.query("DUMMY_CUSTOM_
 ```
 
 {{< note >}} 
-A dummy value is assigned for the `testField` parameter in our query but this can be replaced. We only have one parameter in our example query which is `:testField`.
+A dummy value is assigned for the `testField` parameter in this query but it can be replaced. There is only one parameter in this example query which is `:testField`.
 {{</ note >}} 
 
 Results can be acquired by calling `getResults()` on the `ResultSet`.
