@@ -70,6 +70,7 @@ import java.util.Set;
  * Composite key implementations will track the minimum total weight required (in the simple case – the minimum number of child
  * signatures required) to satisfy the subtree rooted at this node.
  */
+
 public interface CompositeKey extends PublicKey {
     /**
      * This method will detect graph cycles in the full composite key structure to protect against infinite loops when
@@ -118,6 +119,7 @@ import java.security.PublicKey;
 /**
  * A simple data class for passing keys and weights into <code>CompositeKeyGenerator</code>.
  */
+ 
 public final class CompositeKeyNodeAndWeight {
     private final PublicKey node;
     private final int weight;
