@@ -2,13 +2,6 @@
 date: '2021-04-24T00:00:00Z'
 description: "Documentation for the tools and add-ons associated with Corda"
 section_menu: tools
-menu:
-  projects:
-    name: Tools and add-ons
-    weight: 80000
-    identifier: tools
-  tools:
-    weight: 10
 project: tools
 version: 'tools'
 title: Tools and add-ons
