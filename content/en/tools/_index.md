@@ -4,10 +4,10 @@ description: "Documentation for the tools and add-ons associated with Corda"
 section_menu: tools
 project: tools
 version: 'tools'
-title: Tools and add-ons
+title: Tools and Add-Ons
 ---
 
-# Tools and add-ons
+# Tools and Add-Ons
 
 Learn how to use various tools and add-ons to help you with Corda operations and CorDapp design and development:
 
