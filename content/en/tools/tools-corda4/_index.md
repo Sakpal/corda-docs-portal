@@ -1,13 +1,16 @@
 ---
-date: '2022-08-30'
+date: '2020-01-08T09:59:25Z'
 description: "Documentation for the tools and add-ons associated with Corda 4"
-title: "Tools & Add-Ons Corda 4"
-project: tools
-version: 'tools'
-section_menu: tools
 menu:
   versions:
     weight: 100
+  tools-corda4:
+    weight: 1
+    name: Tools & Add-Ons Corda 4
+project: tools
+section_menu: tools-corda4
+title: Tools & Add-Ons Corda 4
+version: 'Tools & Add-Ons Corda 4'
 ---
 
 # Tools and Add-Ons Corda 4

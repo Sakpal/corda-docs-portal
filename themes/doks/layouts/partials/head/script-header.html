@@ -12,7 +12,7 @@
         'language:en'
       ];
 
-    {{ else if eq .Page.Params.version "Corda Index"}}
+    {{ else if eq .Page.Params.version "Version"}}
       {{ $project := .Page.Params.project}}
       window.facetFilters = [
         ['project:{{- $project -}}'],
