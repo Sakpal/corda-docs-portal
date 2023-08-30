@@ -7,12 +7,12 @@ version: 'tools'
 section_menu: tools
 menu:
   versions:
-    weight: -652
+    weight: 100
 ---
 
 # Tools and Add-Ons Corda 4
 
-Learn how to use various tools and add-ons to help you with Corda operations and CorDapp design and development:
+Learn how to use various tools and add-ons to help you with Corda 4 operations and CorDapp design and development:
 
 * [CorDapp Design Language (CDL)](/en/tools/cdl/cdl-index.md)
 * [Tokens SDK](/en/tools/tokens-sdk/tokens-sdk-index.md)
