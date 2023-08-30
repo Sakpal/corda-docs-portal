@@ -12,9 +12,9 @@ menu:
     weight: 80000
     identifier: tools
   tools:
-  version: 'Version'
-  name: "Version"
-  weight: 10
+    version: 'Version'
+    name: "Version"
+    weight: 10
 ---
 
 # Tools and add-ons
