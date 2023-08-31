@@ -49,8 +49,64 @@ $REGISTRATION_CONTEXT = @{
   'corda.endpoints.0.protocolVersion' = "1"
 }
 ```
+
+
 {{% /tab %}}
 {{< /tabs >}}
+
+If registering a member as a notary service representative:
+
+{{< tabs >}}
+{{% tab name="Bash"%}}
+```shell
+export NOTARY_SERVICE_NAME="C=GB,L=London,O=NotaryServiceA"
+export REGISTRATION_CONTEXT='{
+  "corda.session.keys.0.id": "'$SESSION_KEY_ID'",
+  "corda.session.keys.0.signature.spec": "SHA256withECDSA",
+  "corda.ledger.keys.0.id": "'$LEDGER_KEY_ID'",
+  "corda.ledger.keys.0.signature.spec": "SHA256withECDSA",
+  "corda.endpoints.0.connectionURL": "https://'$P2P_GATEWAY_HOST':'$P2P_GATEWAY_PORT'",
+  "corda.endpoints.0.protocolVersion": "1",
+  "corda.roles.0" : "notary",
+  "corda.notary.service.name" : "'$NOTARY_SERVICE_NAME'",
+  "corda.notary.service.flow.protocol.name": "com.r3.corda.notary.plugin.nonvalidating",
+  "corda.notary.service.flow.protocol.version.0": "1",
+  "corda.notary.keys.0.id": "'$NOTARY_KEY_ID'",
+  "corda.notary.keys.0.signature.spec": "SHA256withECDSA"
+}'
+```
+{{% /tab %}}
+{{% tab name="PowerShell" %}}
+```shell
+$NOTARY_SERVICE_NAME = "C=GB,L=London,O=NotaryServiceA"
+$REGISTRATION_CONTEXT = @{
+  'corda.session.keys.0.id' =  $SESSION_KEY_ID
+  'corda.session.keys.0.signature.spec' = "SHA256withECDSA"
+  'corda.ledger.keys.0.id' = $LEDGER_KEY_ID
+  'corda.ledger.keys.0.signature.spec' = "SHA256withECDSA"
+  'corda.endpoints.0.connectionURL' = "https://$P2P_GATEWAY_HOST`:$P2P_GATEWAY_PORT"
+  'corda.endpoints.0.protocolVersion' = "1"
+  'corda.roles.0' = "notary",
+  'corda.notary.service.name' = $NOTARY_SERVICE_NAME,
+  'corda.notary.service.flow.protocol.name' = "com.r3.corda.notary.plugin.nonvalidating",
+  'corda.notary.service.flow.protocol.version.0' = "1",
+  'corda.notary.keys.0.id' = $NOTARY_KEY_ID,
+  'corda.notary.keys.0.signature.spec' = "SHA256withECDSA"
+}
+```
+
+A member may specify custom properties at the time of registration, which will be included in its `MemberInfo`. These must be included in the registration context of the member's request to join. Keys of custom properties must have the prefix "ext.". For example:
+
+```shell
+"context": {
+  "ext.member.key.0": "value0",
+  "ext.member.key.1": "value1"
+}
+```
+
+{{< note >}}
+Custom properties have a character limit of 128 for keys and 800 for values. A maximum of 100 such key-value pairs may be defined in the registration context.
+{{< /note >}}
 
 ## Register the Member
 
@@ -76,6 +132,7 @@ $REGISTER_RESPONSE.registrationStatus
 This sends a join request to the {{< tooltip >}}MGM{{< /tooltip >}}. The response should be `SUBMITTED`.
 
 If you are using the Swagger UI, use the following:
+
 ```shell
 {
   "memberRegistrationRequest":{
