@@ -1,20 +1,12 @@
 ---
-date: '2021-04-24T00:00:00Z'
-description: "Documentation for the tools and add-ons associated with Corda 4"
-title: Tools and Add-Ons Corda 4
-project: tools
-version: 'tools'
-section_menu: tools
-identifier: tools
+date: '2023-08-22'
+title: "Corda 4 Tools & Add-Ons"
+project: tools-corda4
+version: tools
 menu:
   projects:
-    name: Tools and Add-Ons Corda 4
-    weight: 80000
-    identifier: tools
-  tools:
-    version: 'Version'
-    name: "Version"
-    weight: 10
+    weight: 2000
+section_menu: tools-corda4
 ---
 
 # Tools and Add-Ons Corda 4
