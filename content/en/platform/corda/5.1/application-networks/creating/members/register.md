@@ -94,6 +94,9 @@ $REGISTRATION_CONTEXT = @{
 }
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 A member may specify custom properties at the time of registration, which will be included in its MemberInfo. These must be included in the registration context of the member's request to join. Keys of custom properties must have the prefix "ext.".
 
 ```shell
@@ -132,6 +135,7 @@ $REGISTER_RESPONSE.registrationStatus
 This sends a join request to the {{< tooltip >}}MGM{{< /tooltip >}}. The response should be `SUBMITTED`.
 
 If you are using the Swagger UI, use the following:
+
 ```shell
 {
   "memberRegistrationRequest":{
