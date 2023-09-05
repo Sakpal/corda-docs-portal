@@ -72,6 +72,9 @@ $GROUP_PARAMS_UPDATE_RESPONSE = Invoke-RestMethod -SkipCertificateCheck  -Header
 $GROUP_PARAMS_UPDATE_RESPONSE.parameters
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 These submitted parameters are combined with notary information from the platform to construct the new group parameters, which are then signed by the MGM and distributed within the network.
 
 {{< note >}}
