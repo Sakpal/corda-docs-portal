@@ -42,8 +42,10 @@ Both the Signing Service and the PKI Tool support a variety of HSMs.
 
 CENM currently supports the following databases:
 
-* PostgreSQL 11.x (JDBC 42.2.9)
-* PostgreSQL 13.x (JDBC 42.2.9)
+* PostgreSQL 9.6 (JDBC 42.2.8)
+* PostgreSQL 10.10 (JDBC 42.2.8)
+* PostgreSQL 11.5 (JDBC 42.2.8)
+* PostgreSQL 12.2 (JDBC 42.2.8)
 * Azure SQL (Microsoft JDBC Driver 6.4)
 * SQL Server 2017 (Microsoft JDBC Driver 6.4)
 * Oracle 11gR2 (Oracle JDBC 6)
@@ -102,6 +104,6 @@ for your deployment needs.
 |Microsoft|x86-64|Azure SQL,SQL Server 2017|Microsoft JDBC Driver 6.4|
 |Oracle|x86-64|11gR2|Oracle JDBC 6|
 |Oracle|x86-64|12cR2|Oracle JDBC 8|
-|PostgreSQL|x86-64|11.x, 13.x|PostgreSQL JDBC Driver 42.1.4 / 42.2.9|
+|PostgreSQL|x86-64|9.6, 10.10, 11.5, 13.3|PostgreSQL JDBC Driver 42.1.4 / 42.2.9|
 
 {{< /table >}}
