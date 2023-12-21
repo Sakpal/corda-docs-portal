@@ -1,4 +1,5 @@
 ---
+version: "Corda Community Edition 4.12"
 date: '2021-04-24T00:00:00Z'
 menu: []
 tags:

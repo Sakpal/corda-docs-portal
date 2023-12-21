@@ -1,4 +1,5 @@
 ---
+version: "Corda Enterprise Edition 4.12"
 date: '2021-08-25'
 corda-enterprise-4-12:
 parent: corda-enterprise-4-12-cordapps-debugging

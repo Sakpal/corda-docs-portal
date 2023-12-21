@@ -1,5 +1,6 @@
 ---
 title: "Corda Enterprise vs Corda Community"
+version: "Corda Enterprise Edition 4.12"
 date: '2021-07-02'
 menu:
   corda-enterprise-4-12:

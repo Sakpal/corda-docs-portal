@@ -4,6 +4,7 @@ aliases:
 - /head/release-notes.html
 - /HEAD/release-notes.html
 - /release-notes.html
+version: "Corda Community Edition 4.12"
 date: '2023-05-08'
 menu:
   corda-community-4-12:

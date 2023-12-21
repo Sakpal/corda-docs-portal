@@ -2,6 +2,7 @@
 aliases:
 - /docs/corda-enterprise/head/cordapps/getting-set-up.html
 - /docs/corda-enterprise/cordapps/getting-set-up.html
+version: "Corda Enterprise Edition 4.12"
 date: '2021-07-15'
 menu:
   corda-enterprise-4-12:

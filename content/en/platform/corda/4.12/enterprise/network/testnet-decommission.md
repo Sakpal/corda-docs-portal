@@ -3,6 +3,7 @@ aliases:
 - /head/corda-testnet-intro.html
 - /HEAD/corda-testnet-intro.html
 - /corda-testnet-intro.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-enterprise-4-12:

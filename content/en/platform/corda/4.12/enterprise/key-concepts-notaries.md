@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-notaries.html
 - /HEAD/key-concepts-notaries.html
 - /key-concepts-notaries.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-01-30'
 menu:
   corda-enterprise-4-12:

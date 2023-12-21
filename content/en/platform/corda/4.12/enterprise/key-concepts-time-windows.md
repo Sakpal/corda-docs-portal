@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-time-windows.html
 - /HEAD/key-concepts-time-windows.html
 - /key-concepts-time-windows.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-01-30'
 menu:
   corda-enterprise-4-12:

@@ -3,6 +3,7 @@ aliases:
 - /head/blob-inspector.html
 - /HEAD/blob-inspector.html
 - /blob-inspector.html
+version: "Corda Community Edition 4.12"
 date: '2021-07-15'
 menu:
   corda-community-4-12:

@@ -1,5 +1,6 @@
 ---
 title: "Corda Payments SDK"
+version: "Corda Enterprise Edition 4.12"
 date: '2023-02-14'
 menu:
   corda-enterprise-4-12:

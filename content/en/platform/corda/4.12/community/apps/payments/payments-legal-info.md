@@ -1,5 +1,6 @@
 ---
 title: "Corda Payments Legal Info"
+version: "Corda Community Edition 4.12"
 date: '2023-02-14'
 menu:
   corda-community-4-12:

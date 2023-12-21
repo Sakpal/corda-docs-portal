@@ -3,6 +3,7 @@ aliases:
 - /head/node-docker-deployments.html
 - /HEAD/node-docker-deployment.html
 - /node-docker-deployments.html
+version: "Corda Community Edition 4.12"
 date: '2022-05-26T12:00:00Z'
 menu:
   corda-community-4-12:

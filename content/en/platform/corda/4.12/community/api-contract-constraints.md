@@ -3,6 +3,7 @@ aliases:
 - /head/api-contract-constraints.html
 - /HEAD/api-contract-constraints.html
 - /api-contract-constraints.html
+version: "Corda Community Edition 4.12"
 date: '2021-08-11'
 menu:
   corda-community-4-12:

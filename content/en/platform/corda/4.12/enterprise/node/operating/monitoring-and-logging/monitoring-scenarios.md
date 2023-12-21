@@ -1,6 +1,7 @@
 ---
 aliases:
 - /releases/4.11/node-metrics.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-04-16T19:30:25Z'
 menu:
   corda-enterprise-4-12:

@@ -1,4 +1,5 @@
 ---
+version: "Corda Community Edition 4.12"
 date: '2022-02-15'
 menu:
   corda-community-4-12:

@@ -3,6 +3,7 @@ aliases:
 - /head/api-service-classes.html
 - /HEAD/api-service-classes.html
 - /api-service-classes.html
+version: "Corda Community Edition 4.12"
 date: '2023-01-09'
 menu:
   corda-community-4-12:

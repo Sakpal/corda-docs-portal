@@ -3,6 +3,7 @@ aliases:
 - /head/building-the-docs.html
 - /HEAD/building-the-docs.html
 - /building-the-docs.html
+version: "Corda Community Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-community-4-12:

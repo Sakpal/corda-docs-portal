@@ -1,5 +1,6 @@
 ---
 title: Getting started
+version: "Corda Community Edition 4.12"
 date: '2023-01-27'
 
 menu:

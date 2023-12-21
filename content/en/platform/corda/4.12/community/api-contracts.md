@@ -3,6 +3,7 @@ aliases:
 - /head/api-contracts.html
 - /HEAD/api-contracts.html
 - /api-contracts.html
+version: "Corda Community Edition 4.12"
 date: '2021-08-11'
 menu:
   corda-community-4-12:

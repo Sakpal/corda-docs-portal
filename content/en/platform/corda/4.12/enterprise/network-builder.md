@@ -3,6 +3,7 @@ aliases:
 - /head/network-builder.html
 - /HEAD/network-builder.html
 - /network-builder.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-enterprise-4-12:

@@ -3,6 +3,7 @@ aliases:
 - /head/building-against-non-release.html
 - /HEAD/building-against-non-release.html
 - /building-against-non-release.html
+version: "Corda Community Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-community-4-12:

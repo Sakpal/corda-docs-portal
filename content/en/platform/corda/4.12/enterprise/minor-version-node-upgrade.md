@@ -1,4 +1,5 @@
 ---
+version: "Corda Enterprise Edition 4.12"
 date: '2021-12-21'
 menu:
   corda-enterprise-4-12:

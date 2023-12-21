@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-tradeoffs.html
 - /HEAD/key-concepts-tradeoffs.html
 - /key-concepts-tradeoffs.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-01-30'
 menu:
   corda-enterprise-4-12:

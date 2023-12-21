@@ -6,6 +6,7 @@ aliases:
 - /releases/release-V4.4/tutorial-cordapp.html
 - /docs/corda-os/head/tutorial-cordapp.html
 - /docs/corda-os/tutorial-cordapp.html
+version: "Corda Enterprise Edition 4.12"
 date: '2021-07-15'
 menu:
   corda-enterprise-4-12:

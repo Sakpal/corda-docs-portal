@@ -3,6 +3,7 @@ aliases:
 - /head/tools-index.html
 - /HEAD/tools-index.html
 - /tools-index.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-01-30'
 menu:
   corda-enterprise-4-12:

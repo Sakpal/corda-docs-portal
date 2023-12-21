@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-vault.html
 - /HEAD/key-concepts-vault.html
 - /key-concepts-vault.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-02-01'
 menu:
   corda-enterprise-4-12:

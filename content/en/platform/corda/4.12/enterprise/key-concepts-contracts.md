@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-contracts.html
 - /HEAD/key-concepts-contracts.html
 - /key-concepts-contracts.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-1-30'
 menu:
   corda-enterprise-4-12:

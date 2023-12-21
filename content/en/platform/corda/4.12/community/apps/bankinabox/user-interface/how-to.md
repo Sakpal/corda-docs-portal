@@ -1,4 +1,5 @@
 ---
+version: "Corda Community Edition 4.12"
 date: '2020-01-08T09:59:25Z'
 menu:
  corda-community-4-12:

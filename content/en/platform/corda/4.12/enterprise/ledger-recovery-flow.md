@@ -1,4 +1,5 @@
 ---
+version: "Corda Enterprise Edition 4.12"
 date: '2023-07-27T12:00:00Z'
 menu:
 corda-enterprise-4-12:

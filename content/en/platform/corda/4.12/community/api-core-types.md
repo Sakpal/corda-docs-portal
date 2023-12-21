@@ -3,6 +3,7 @@ aliases:
 - /head/api-core-types.html
 - /HEAD/api-core-types.html
 - /api-core-types.html
+version: "Corda Community Edition 4.12"
 date: '2021-08-11'
 menu:
   corda-community-4-12:

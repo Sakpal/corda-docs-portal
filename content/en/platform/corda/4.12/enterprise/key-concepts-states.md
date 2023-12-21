@@ -3,6 +3,7 @@ aliases:
 - /head/key-concepts-states.html
 - /HEAD/key-concepts-states.html
 - /key-concepts-states.html
+version: "Corda Enterprise Edition 4.12"
 date: '2023-01-25'
 menu:
   corda-enterprise-4-12:

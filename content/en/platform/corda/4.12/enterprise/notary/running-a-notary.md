@@ -3,6 +3,7 @@ aliases:
 - /head/running-a-notary.html
 - /HEAD/running-a-notary.html
 - /running-a-notary.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-community-4-12:

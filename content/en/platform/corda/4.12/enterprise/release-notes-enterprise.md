@@ -1,5 +1,6 @@
 ---
 title: Corda Enterprise Edition 4.12 release notes
+version: "Corda Enterprise Edition 4.12"
 date: '2023-05-08'
 
 menu:

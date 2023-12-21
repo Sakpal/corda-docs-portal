@@ -3,6 +3,7 @@ aliases:
 - /head/api-service-hub.html
 - /HEAD/api-service-hub.html
 - /api-service-hub.html
+version: "Corda Community Edition 4.12"
 date: '2021-07-15'
 menu:
   corda-community-4-12:

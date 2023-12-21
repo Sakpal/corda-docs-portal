@@ -3,6 +3,7 @@ aliases:
 - /head/cipher-suites.html
 - /HEAD/cipher-suites.html
 - /cipher-suites.html
+version: "Corda Community Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 menu:
   corda-community-4-12:

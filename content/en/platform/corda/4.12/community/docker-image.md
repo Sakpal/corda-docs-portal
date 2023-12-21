@@ -3,6 +3,7 @@ aliases:
 - /head/docker-image.html
 - /HEAD/docker-image.html
 - /docker-image.html
+version: "Corda Community Edition 4.12"
 date: '2023-01-10'
 menu:
   corda-community-4-12:

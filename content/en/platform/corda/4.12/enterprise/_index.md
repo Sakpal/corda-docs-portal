@@ -1,4 +1,5 @@
 ---
+version: "Corda Enterprise Edition 4.12"
 date: '2020-04-07T12:00:00Z'
 description: "Documentation for the 4.12 Enterprise Edition release of Corda"
 menu:

@@ -3,6 +3,7 @@ aliases:
 - /head/error-codes.html
 - /HEAD/error-codes.html
 - /error-codes.html
+version: "Corda Enterprise Edition 4.12"
 date: '2020-05-05T12:00:00Z'
 menu:
   corda-enterprise-4-12:

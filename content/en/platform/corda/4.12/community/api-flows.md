@@ -3,6 +3,7 @@ aliases:
 - /head/api-flows.html
 - /HEAD/api-flows.html
 - /api-flows.html
+version: "Corda Community Edition 4.12"
 date: '2021-08-12'
 menu:
   corda-community-4-12:

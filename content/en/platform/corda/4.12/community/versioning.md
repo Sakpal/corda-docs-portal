@@ -3,6 +3,7 @@ aliases:
 - /head/versioning.html
 - /HEAD/versioning.html
 - /versioning.html
+version: "Corda Community Edition 4.12"
 date: '2022-11-23T16:36:00Z'
 menu:
   corda-community-4-12:
