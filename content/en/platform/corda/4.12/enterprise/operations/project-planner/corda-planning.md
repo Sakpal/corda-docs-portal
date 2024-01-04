@@ -1,5 +1,4 @@
 ---
-version: "Corda Enterprise Edition 4.12"
 date: '2020-06-18T12:00:00Z'
 menu:
   corda-enterprise-4-12:
@@ -13,6 +12,8 @@ tags:
 title: Corda Enterprise Operations Guide
 weight: 10
 ---
+
+Version: {{<version>}}
 
 # Corda for Project Planners
 

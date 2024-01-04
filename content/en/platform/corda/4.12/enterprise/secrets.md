@@ -1,5 +1,4 @@
 ---
-version: "Corda Enterprise Edition 4.12"
 date: '2020-09-29T12:00:00Z'
 menu:
   corda-enterprise-4-12:
@@ -11,6 +10,8 @@ title: Corda secrets
 weight: 110
 ---
 # Corda secrets
+
+Version: {{<version>}}
 
 This page documents the secrets that are managed and required by a Corda installation. The secrets fall into two categories:
 

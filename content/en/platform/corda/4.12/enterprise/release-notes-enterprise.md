@@ -16,7 +16,7 @@ tags:
 weight: 10
 ---
 
-# Corda Enterprise Edition 4.11 release notes
+# {{<version>}} release notes
 
 ## Corda Enterprise Edition 4.11.1 release notes
 
